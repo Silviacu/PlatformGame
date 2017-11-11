@@ -25,22 +25,22 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
       ![](https://i.imgur.com/hY7tRJY.png)
 
 3. Click Edit Configurations 
-      ![](https://imgur.com/vn1IUEN)
+      ![](https://imgur.com/vn1IUEN.png)
       
 4. Click the + sign and then click on "Application"
-    ![](https://imgur.com/7EQ65bs)
+    ![](https://imgur.com/7EQ65bs.png)
     
 5. In the Name Type "Desktop" and then click next to "main claa" text box the 3 dots
-  ![](https://imgur.com/0eOVsN3)
+  ![](https://imgur.com/0eOVsN3.png)
   
 6. Click the DesktopLauncher (com.silvia.wonderwomanplatformgame.desktop) desktop and then click "ok"
-  ![](https://imgur.com/H53KHxS)
+  ![](https://imgur.com/H53KHxS.png)
   
 7. Add \android\assets in the "Working Directory" Text tab
-    ![](https://imgur.com/jI7X7lk)
+    ![](https://imgur.com/jI7X7lk.png)
 
 8. Make sure the "JRE" tab is set to default (1.8 SDK) and then click "Apply" and "Ok"
-     ![](https://imgur.com/hY7tRJY)
+     ![](https://imgur.com/hY7tRJY.png)
 
 9. Let Gradle sync and restart Android studios 
 
@@ -49,19 +49,19 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
 ## Running the Game
 
 1. Click the the green play sign next to "Desktop"
-     ![](https://imgur.com/ArrV6Tk)
+     ![](https://imgur.com/ArrV6Tk.png)
      
 ---    
 
 ## Running the Tests
  
  1. Go to core\tests\com.silviawonderwomanplatformgame
-    ![](https://imgur.com/Gzirn56)
+    ![](https://imgur.com/Gzirn56.png)
  
  2. Right click on com.silviawonderwomanplatformgame
  
  3. Click on Run 'Tests in 'com.silviawonderwomanplatformgame
-     ![](https://imgur.com/lZJOddQ)
+     ![](https://imgur.com/lZJOddQ.png)
  ---
  
 
