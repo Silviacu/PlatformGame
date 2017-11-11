@@ -65,4 +65,9 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
  ---
  
 
+## Playing the Game
+    1. Switch to Desktop Configration
+    2. Click the play button
+    3. Wait for the game to load
+    4. Move with the arrow keys
 
