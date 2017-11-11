@@ -22,7 +22,7 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
         http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
 3. In Android Stuidos click on the android button next to the green triangle
-      ![](https://i.imgur.com/hY7tRJY.png)
+      ![](https://imgur.com/PmvMha3.png)
 
 3. Click Edit Configurations 
       ![](https://imgur.com/vn1IUEN.png)
