@@ -17,7 +17,7 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
 
 > git clone https://github.com/Silviacu/PlatformGame.git
 
-2. Configure the game to your IDE
+2. Configure the game to your IDE: 
     Open The game in Android Studios ( Make sure to have jdk 1.8)
         http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
@@ -28,16 +28,16 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
       ![](https://imgur.com/vn1IUEN.png)
       
 4. Click the + sign and then click on "Application"
-    ![](https://imgur.com/7EQ65bs.png)
+      ![](https://imgur.com/7EQ65bs.png)
     
 5. In the Name Type "Desktop" and then click next to "main claa" text box the 3 dots
-  ![](https://imgur.com/0eOVsN3.png)
+     ![](https://imgur.com/0eOVsN3.png)
   
 6. Click the DesktopLauncher (com.silvia.wonderwomanplatformgame.desktop) desktop and then click "ok"
-  ![](https://imgur.com/H53KHxS.png)
+     ![](https://imgur.com/H53KHxS.png)
   
 7. Add \android\assets in the "Working Directory" Text tab
-    ![](https://imgur.com/jI7X7lk.png)
+     ![](https://imgur.com/jI7X7lk.png)
 
 8. Make sure the "JRE" tab is set to default (1.8 SDK) and then click "Apply" and "Ok"
      ![](https://imgur.com/hY7tRJY.png)
