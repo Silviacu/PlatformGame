@@ -21,7 +21,7 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
     Open The game in Android Studios ( Make sure to have jdk 1.8)
         http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
-3. In Android Stuidos click on the andoird button next to the green triangle
+3. In Android Stuidos click on the android button next to the green triangle
       ![](https://i.imgur.com/hY7tRJY.png)
 
 3. Click Edit Configurations 
