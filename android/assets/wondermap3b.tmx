@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="2017.09.13" orientation="orthogonal" renderorder="right-down" width="200" height="28" tilewidth="16" tileheight="16" infinite="0" nextobjectid="22">
+ <tileset firstgid="1" source="classical_ruin_tiles5.tsx"/>
+ <layer name="BG_Sky" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztw8EJAAAMA6H7Zv+Fu0dRcNVUVVVVVVVVVVVVVVVVVVVVVVVVVVX12QMiJ8Th
+  </data>
+ </layer>
+ <layer name="BG_Clouds" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt2NkNwkAMRdEJYimFHUphh2ZYGmVphdcAApFk7MT3SO/f8Yw8VlICgLzuRUoP5am8Cutq0AbDTkojZaxMlGnHuqL/dVV7T+krgwZ/B6pTdmaudI/WykbZKjvulXtR3skqZjcz07+q3+goZ87s/q4N+x/nHFOOd567haaK8s4DAJBLlH9M1mbaW+bKQlmyw9Sm6j63dff0dh/3quGgHJWTg3rqYt33KH0uy1ufzqrholyVm4N66mLd9yh9Los+2aDvAOCT9X4PeGa93+N3zLL82O+bg1kGfMYsAwAAAAAAAAAAABDFG+HMNG0=
+  </data>
+ </layer>
+ <layer name="FG_Other" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1TEKhTAQBcC10sL7955Mv3oQE9BG/oq1mYFlA2n38SIAAAAAAAAAAACAL5i6iF/Za5nt3Nd7P/+hVfX++zI1BvcZO/mgbfX+5/ifjyXkg7Y99cegP2ic/oCc/oCc/oCc/oCc/oCc/gAAAACAdw6kaRpc
+  </data>
+ </layer>
+ <layer name="BG_Environment" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt2DtuwkAURmHsVUAFYidURGwjaWh4mDxa7yIJT7ES3rCetK7yK8aSPUJKmswdifNJR7an8S3GGkGtBgAAAAAAAAAAAOA/DdVIjVWiJupZvahX9WY3GmDuXX2oTzVVMzVXC7VUK7vRAHMbtVU7tVcHdVQndVYXs8kAe/U/BNyrLMqvX1F1vXjOnHXgnrTj/NqJq+vFc9tZ92Ggdw4N3gu4iv3fcPZjw+j7aKpWXqr71O/bgarQzo+ueshLu3wfMBba+bHW751HXZ+u94Cl0M6P8v8E7n8GgG+hnR/lOdyZAN9COz/Kc7gzAb71fjk/ep73aD++fQ9YSK570N2LxXPCHgUAAAAAAAB+fAM4tCZI
+  </data>
+ </layer>
+ <layer name="FG_Ground" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt17ERQjEMRMEPTUBRNEEPNEE51EdCQGbk+MRod+Ylji5R4OMAAAAAAAAAAAAA6O+yqbvrJgAAIG/3z+j+1/DPAKCj9ym9APq6nX/f3Ax8PYr7qN7o796wf9ioGT0btkrv0dxeDVul92hu6fusWqX3aG7p+6xapfdobun7rFql92huHwz3mZQ=
+  </data>
+ </layer>
+ <layer name="FG_Ground_Decor" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAD8GVeAAAE=
+  </data>
+ </layer>
+ <layer name="BG_Objects" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt2bERgCAQBMCnBduBbrQDqsYqJJPIgAR1dmdu5sNLLvoIAAAAAAAAAAAA3mpLqxvMa6sLAAAAAAAA8CiniPLhfxTzzuGuQ7jtfRuHfQAAAADAL1yrOQSC
+  </data>
+ </layer>
+ <layer name="FG_Destructibles" width="200" height="28">
+  <data encoding="base64" compression="zlib">
+   eJzt1asNACEAA1CYAPZfEMZAnDwICYJP8p6sqmkaAgAAAAAAAAAAAAAAAAB8yukCcLEU/1ndXwOekTubAeZ8C4z5FgAAAABgRQOBYgLq
+  </data>
+ </layer>
+ <objectgroup name="OBJ_Treasure_1">
+  <object id="5" x="400" y="191" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Treasure_2">
+  <object id="4" x="1984.5" y="323.5" width="31.5" height="27.75"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Breakables">
+  <object id="11" x="1360" y="271" width="15" height="32"/>
+  <object id="12" x="1440" y="287" width="16" height="32.5"/>
+  <object id="13" x="1552" y="320" width="16" height="31.5"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Spikes">
+  <object id="10" x="862.5" y="334" width="50" height="30.5">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup name="OBJ_Powerup">
+  <object id="7" x="1151.5" y="191" width="16" height="17"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Zone_Fall">
+  <object id="1" x="591.5" y="399.5" width="64" height="48.5"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Money"/>
+ <objectgroup name="OBJ_Health">
+  <object id="8" x="816" y="335.5" width="16" height="17"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Zone_Start">
+  <object id="2" x="29" y="285.5" width="36.5" height="66.5"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Zone_End">
+  <object id="3" x="2672" y="207" width="80" height="143.5"/>
+ </objectgroup>
+ <objectgroup name="OBJ_Ground">
+  <object id="14" x="-0.666667" y="352" width="593.333" height="96"/>
+  <object id="15" x="655.75" y="351.75" width="2545.58" height="96.25"/>
+  <object id="16" x="240" y="271.75" width="112" height="16"/>
+  <object id="17" x="335.75" y="207.75" width="96.25" height="15.75"/>
+  <object id="18" x="976" y="272" width="95.75" height="15.5"/>
+  <object id="19" x="1071.75" y="207.5" width="96" height="16.5"/>
+  <object id="20" x="1359.75" y="303.75" width="16" height="48"/>
+  <object id="21" x="1440" y="319.75" width="15.75" height="31.5"/>
+ </objectgroup>
+</map>
