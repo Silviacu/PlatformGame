@@ -18,7 +18,8 @@ public class ZoneFall extends InteractiveTileObject {
 
     @Override
     public void onTouch() {
-        Gdx.app.log("ZoneFall", "Collision");
+
+
     }
 
     public static void build_fall_zones(World world, TiledMap map) {

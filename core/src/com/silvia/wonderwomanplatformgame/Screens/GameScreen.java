@@ -24,14 +24,11 @@ import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 public class GameScreen implements Screen{
 
     private WonderWomanGame game;
-
     private OrthographicCamera gamecamera; //what follows along in our game came
     private Viewport gamePort;
-
     private TmxMapLoader maploader;//loaded map into our world
     private TiledMap map; //reference to the map
     private OrthogonalTiledMapRenderer renderer; // rendered our map to the screen
-
     //Box2D variables
     private World world;//
     private Box2DDebugRenderer b2dr; //givs up graphiccal representation of our fixtures in our world

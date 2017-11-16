@@ -18,7 +18,7 @@ public class Spike extends InteractiveTileObject {
 
     @Override
     public void onTouch() {
-        Gdx.app.log("Spikes", "Collision");
+
     }
 
 

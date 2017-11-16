@@ -12,14 +12,12 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 public class Powerup extends InteractiveTileObject {
 
     public Powerup(World world, TiledMap map, Rectangle bounds) {
-        super(world, map, bounds);
-        fixture.setUserData(this);
-        setCategoryFilter(WonderWomanGame.HEALTH_BIT);
+
     }
 
     @Override
     public void onTouch() {
-        Gdx.app.log("Powerup", "Collision");
+
     }
 
     public static void build_powerups(World world, TiledMap map) {

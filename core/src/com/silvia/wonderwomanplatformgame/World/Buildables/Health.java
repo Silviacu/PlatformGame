@@ -21,9 +21,12 @@ public class Health extends InteractiveTileObject {
 
     @Override
     public void onTouch() {
-        Gdx.app.log("Health", "Collision");
+
     }
 
+    public void onTouch(Character character) {
+
+    }
     public static void build_health_packs(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_health).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();

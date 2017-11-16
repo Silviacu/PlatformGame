@@ -18,7 +18,8 @@ public class ZoneEnd extends InteractiveTileObject {
 
     @Override
     public void onTouch() {
-        Gdx.app.log("ZoneEnd", "Collision");
+
+
     }
 
     public static void build_end_zones(World world, TiledMap map) {
