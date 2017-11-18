@@ -28,7 +28,7 @@ public class EnemyBigSprite extends CharacterSprite {
     public EnemyBigSprite(World world) {
     }
 
-    private void setupAnimationFrames() {// test in progress need to finish (tedious)
+    private void setupAnimationFrames() {
 
     }
     private void setupIdleFrames() {

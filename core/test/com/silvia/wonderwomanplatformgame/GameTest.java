@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 
 
 
-public class GameTest {
+public class GameTest  {
     // This is our "test" application
     private static Application application;
 

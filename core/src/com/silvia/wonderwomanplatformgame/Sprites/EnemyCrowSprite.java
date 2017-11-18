@@ -29,7 +29,7 @@ public class EnemyCrowSprite extends CharacterSprite {
     public EnemyCrowSprite(World world) {
     }
 
-    private void setupAnimationFrames() {// test in progress need to finish (tedious)
+    private void setupAnimationFrames() {
 
     }
     private void setupIdleFrames() {

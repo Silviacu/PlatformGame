@@ -15,6 +15,7 @@ public class EnemyZombie extends EnemyCharacter {
     public EnemyZombie() {
         this.walkspeed = 1;
         this.facingLeft = true;
+
     }
 
     public void bite() {

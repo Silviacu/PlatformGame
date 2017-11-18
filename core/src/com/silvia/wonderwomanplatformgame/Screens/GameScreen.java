@@ -12,8 +12,15 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
+import com.silvia.wonderwomanplatformgame.HUDs.DeadHUD;
+import com.silvia.wonderwomanplatformgame.HUDs.PauseHUD;
+import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
+import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 import com.silvia.wonderwomanplatformgame.World.MapOne;
+import com.silvia.wonderwomanplatformgame.World.WorldObjectCollisionListener;
+import com.silvia.wonderwomanplatformgame.World.WorldObjectsBuilder;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 
@@ -26,22 +33,42 @@ public class GameScreen implements Screen{
     private WonderWomanGame game;
     private OrthographicCamera gamecamera; //what follows along in our game came
     private Viewport gamePort;
+    private PointsTracker pointsTracker;
+    private PlayHUD hud;
+    private DeadHUD deadHud;
+    private PauseHUD pauseHUD;
     private TmxMapLoader maploader;//loaded map into our world
     private TiledMap map; //reference to the map
     private OrthogonalTiledMapRenderer renderer; // rendered our map to the screen
     //Box2D variables
     private World world;//
     private Box2DDebugRenderer b2dr; //givs up graphiccal representation of our fixtures in our world
+    private WonderWomanCharacter player1;
+
+
+    public HudState hudState;
+    public enum HudState {
+        PLAY,
+        PAUSE,
+        DEAD
+    }
 
     //making a constructor because sending game to screen
     public GameScreen(WonderWomanGame game){
         this.game = game;
         gamecamera = new OrthographicCamera();
         gamePort = new FitViewport(WonderWomanGame.virtualwidth/ WonderWomanGame.PPM,WonderWomanGame.virtualheight/WonderWomanGame.PPM, gamecamera);
+        pointsTracker = new PointsTracker();
+        hud = new PlayHUD(game.batch, this);
 
         setGameMap(MapOne.mapFilePath);
         setGameCamera();
         setGameWorld();
+
+        player1 = WonderWomanCharacter.getInstance();
+        player1.init(world);
+
+        world.setContactListener(new WorldObjectCollisionListener());
     }
 
     private void setGameMap(String mapPath) {
@@ -57,6 +84,7 @@ public class GameScreen implements Screen{
     private void setGameWorld() {
         world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         b2dr = new Box2DDebugRenderer();//
+        new WorldObjectsBuilder(world, map, pointsTracker);
     }
 
     @Override
@@ -65,11 +93,15 @@ public class GameScreen implements Screen{
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            gamecamera.position.x += 1;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            player1.jump();
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-            gamecamera.position.x -= 1;
+        //want to know if they are holding it down thats why its not just,  and want to check that the person is not going a faster speed
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1.characterSprite.b2body.getLinearVelocity().x <= 2) {
+            player1.walkRight();
+        }
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1.characterSprite.b2body.getLinearVelocity().x >= -2) {
+            player1.walkLeft();
         }
     }
 
@@ -80,6 +112,10 @@ public class GameScreen implements Screen{
 
         world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
 
+        player1.characterSprite.update(dt);
+        hud.update(dt, pointsTracker.getScore());
+
+        gamecamera.position.x = player1.getXPosition();
         gamecamera.update();
         renderer.setView(gamecamera); //render what our game cam can see
     }
@@ -100,7 +136,11 @@ public class GameScreen implements Screen{
 
         game.batch.setProjectionMatrix(gamecamera.combined);
         game.batch.begin();
+        player1.characterSprite.draw(game.batch);
         game.batch.end();
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     @Override
@@ -129,7 +169,7 @@ public class GameScreen implements Screen{
         renderer.dispose();
         world.dispose();
         b2dr.dispose();
-        //hud.dispose();
+        hud.dispose();
     }
 }
 

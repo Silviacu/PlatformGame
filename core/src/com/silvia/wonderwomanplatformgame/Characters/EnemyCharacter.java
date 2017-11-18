@@ -18,8 +18,8 @@ public class EnemyCharacter extends Character {
     }
 
     @Override
-    public void renderSprite(World world, GameScreen screen) {
-        super.renderSprite(world, screen);
+    public void renderSprite(World world) {
+        super.renderSprite(world);
     }
 
     public void onTouch(Character touchedCharacter) {

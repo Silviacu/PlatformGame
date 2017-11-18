@@ -1,10 +1,12 @@
 package com.silvia.wonderwomanplatformgame.PointsTracker;
 
+import com.silvia.wonderwomanplatformgame.GameTest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PointsTrackerTest {
+public class PointsTrackerTest extends GameTest {
     PointsTracker pt = new PointsTracker();
 
     @Test

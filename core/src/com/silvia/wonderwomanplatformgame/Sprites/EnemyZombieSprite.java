@@ -30,7 +30,7 @@ public class EnemyZombieSprite extends CharacterSprite {
     public EnemyZombieSprite(World world) {
     }
 
-    private void setupAnimationFrames() {// test in progress need to finish (tedious)
+    private void setupAnimationFrames() {
 
     }
     private void setupIdleFrames() {

@@ -1,5 +1,7 @@
 package com.silvia.wonderwomanplatformgame.Sprites;
 
+import com.silvia.wonderwomanplatformgame.GameTest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by silvia on 11/15/2017.
  */
-public class EnemyCrowSpriteTest {
+public class EnemyCrowSpriteTest extends GameTest{
     @Test
     public void setSprite() throws Exception {
 

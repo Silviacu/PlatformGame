@@ -1,5 +1,7 @@
 package com.silvia.wonderwomanplatformgame.Characters.Enemies;
 
+import com.silvia.wonderwomanplatformgame.GameTest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -7,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by silvia on 11/15/2017.
  */
-public class EnemyCrowTest {
+public class EnemyCrowTest extends GameTest {
     @Test
     public void swoop() throws Exception {
 
