@@ -19,10 +19,19 @@ public class Character {
     }
 
     public String characterName;
+    public double attackDamage = 5.0;
+    public int invulnerabilityTimer;
+    public float health;
+
     public CharacterSprite characterSprite;
     public CharacterLivingStatus status;
-    public float health;
-    public double attackDamage = 5.0;
+
+    public CharacterLivingStatus getStatus() {
+        return status;
+    }
+    public void setStatus(CharacterLivingStatus status) {
+        this.status = status;
+    }
 
     public Character() {
         this("Default Character", 10);
@@ -34,10 +43,12 @@ public class Character {
         this.status = CharacterLivingStatus.ALIVE;
     }
 
+    // render the characters sprite on the world/ screen
     public void renderSprite(World world){
         characterSprite = new CharacterSprite(world, "ww.png");
     };
 
+    //     DAMAGES
     public double dealDamage(double damage, Character targetCharacter) {
         if (targetCharacter.receiveDamage(damage) <= 0) {
             System.out.println(this.characterName + " killed " + targetCharacter.characterName);
@@ -47,15 +58,18 @@ public class Character {
         return targetCharacter.health;
     }
 
+
     public double receiveDamage(double damage) {
         if (health - damage <= 0) {
-            this.status = CharacterLivingStatus.DEAD;
-            this.health =0;
-            // this.rip();
+            status = CharacterLivingStatus.DEAD;
+            health = 0;
         } else{
-            this.health -= damage;
+            health -= damage;
         }
-        System.out.println(this.status);
-        return health - damage;
+        if (invulnerabilityTimer == 0) {
+            invulnerabilityTimer = 3;
+        }
+        System.out.println(status);
+        return health;
     }
 }

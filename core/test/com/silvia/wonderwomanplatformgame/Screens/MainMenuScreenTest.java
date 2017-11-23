@@ -1,8 +1,12 @@
 package com.silvia.wonderwomanplatformgame.Screens;
 
 import com.silvia.wonderwomanplatformgame.GameTest;
+import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -11,58 +15,49 @@ import static org.junit.Assert.*;
  */
 public class MainMenuScreenTest extends GameTest{
     @Test
-    public void testChangeName() throws Exception {
+    public void readScoreTest() {
+        List<String> scoreboard = new ArrayList<String>();
+        PointsTracker pt = new PointsTracker();
+        try {
+            scoreboard = pt.readScore();
+        } catch (Exception io) {
+            System.out.println(io);
+        }
 
+        assertNotNull(scoreboard);
+        assertEquals("Silvia: 9001", scoreboard.get(0));
     }
 
     @Test
-    public void show() throws Exception {
+    public void changePlayerName() {
+        MainMenuScreen ms = new MainMenuScreen();
+        assertEquals("Player C", ms.testPlayerName);
 
+        ms.testChangeName("Player B");
+        assertEquals("Player B", ms.testPlayerName);
+
+        ms.testChangeName("Player A");
+        assertEquals("Player A", ms.testPlayerName);
     }
 
     @Test
-    public void render() throws Exception {
+    public void displayScoresTest() {
+        PointsTracker pt = new PointsTracker();
+        List<String> scoreboard = new ArrayList<String>();
 
+        try {
+            scoreboard = pt.readScore();
+        } catch (Exception io) {
+            System.out.println(io);
+        }
+
+        String scoresList = "Scores:\n======";
+        int currentScore = 1;
+        for(String score: scoreboard) {
+            scoresList += ("\n " + currentScore + ". " + score);
+            currentScore++;
+        }
+        System.out.println(scoresList);
+        assertEquals("Silvia: 9001", scoreboard.get(0));
     }
-
-    @Test
-    public void update() throws Exception {
-
-    }
-
-    @Test
-    public void resize() throws Exception {
-
-    }
-
-    @Test
-    public void pause() throws Exception {
-
-    }
-
-    @Test
-    public void resume() throws Exception {
-
-    }
-
-    @Test
-    public void hide() throws Exception {
-
-    }
-
-    @Test
-    public void dispose() throws Exception {
-
-    }
-
-    @Test
-    public void displayMenu() throws Exception {
-
-    }
-
-    @Test
-    public void displayScore() throws Exception {
-
-    }
-
 }

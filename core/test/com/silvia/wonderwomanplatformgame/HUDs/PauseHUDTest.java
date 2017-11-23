@@ -10,49 +10,17 @@ import static org.junit.Assert.*;
  * Created by silvia on 11/15/2017.
  */
 public class PauseHUDTest extends GameTest {
-    @Test
-    public void setupLabels() throws Exception {
+        PauseHUD pauseHud = new PauseHUD();
 
+        @Test
+        public void testLabels() {
+            assertEquals(true, pauseHud.pauseLabel.textEquals("Paused"));
+            assertEquals(true, pauseHud.resumeLabel.textEquals("Resume (R)"));
+            assertEquals(true, pauseHud.exitLabel.textEquals("Exit (Esc)"));
+        }
+
+        @Test
+        public void testShowHide() {
+            assertNotNull(pauseHud);
+        }
     }
-
-    @Test
-    public void bringUpPauseHUD() throws Exception {
-
-    }
-
-    @Test
-    public void dispose() throws Exception {
-
-    }
-
-    @Test
-    public void update() throws Exception {
-
-    }
-
-    @Test
-    public void showPauseHud() throws Exception {
-
-    }
-
-    @Test
-    public void showPauseHudTest() throws Exception {
-
-    }
-
-    @Test
-    public void hidePauseHud() throws Exception {
-
-    }
-
-    @Test
-    public void hidePauseHudTest() throws Exception {
-
-    }
-
-    @Test
-    public void getTestActors() throws Exception {
-
-    }
-
-}

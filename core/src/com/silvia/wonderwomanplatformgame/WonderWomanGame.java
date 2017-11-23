@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
+import com.silvia.wonderwomanplatformgame.Screens.WelcomeScreen;
 
 public class WonderWomanGame extends Game {
 	public SpriteBatch batch; //container that hold images and textures
 	// when we redner them to the screen the spritebatch draws everything
 	//public so all of the screens has acces to the sprites
+	public static String playerName = "Silvia";
 
 	//	=== WINDOW VARIABLES ===
 	public static final int virtualwidth =640;
@@ -37,7 +39,7 @@ public class WonderWomanGame extends Game {
 		batch = new SpriteBatch();
 
 		//the game can set screens
-		setScreen(new GameScreen(this));
+		setScreen(new WelcomeScreen(this));
 	}
 
 	@Override

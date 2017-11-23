@@ -18,7 +18,7 @@ public class NormalState implements CharacterState{
 
     @Override
     public float getJump(float jump) {
-        return 0;
+        return 1;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class WorldObjectsBuilderTest extends GameTest{
     public void testWorldObjectsBuilder() {
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
-        TiledMap map = mapLoader.load(System.getProperty("user.dir")+ "\\android\\assets\\" + MapOne.mapFilePath);
+        TiledMap map = mapLoader.load(MapOne.mapFilePath);
         PointsTracker pointsTracker = new PointsTracker();
         assertNotNull(new WorldObjectsBuilder(world, map, pointsTracker));
     }

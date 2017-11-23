@@ -10,7 +10,6 @@ import static org.junit.Assert.*;
  * Created by silvia on 11/15/2017.
  */
 public class PlayHUDTest extends GameTest {
-
     PlayHUD playHUD = new PlayHUD();
 
     @Test
@@ -36,15 +35,4 @@ public class PlayHUDTest extends GameTest {
         playHUD.update(1, 40);
         assertEquals(true, playHUD.countdownLabel.textEquals("299"));
     }
-
-    @Test
-    public void pausePressed() throws Exception {
-
-    }
-
-    @Test
-    public void resume() throws Exception {
-
-    }
-
 }

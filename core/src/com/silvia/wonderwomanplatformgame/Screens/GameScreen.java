@@ -1,5 +1,4 @@
 package com.silvia.wonderwomanplatformgame.Screens;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -10,56 +9,64 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.silvia.wonderwomanplatformgame.Characters.Character;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.DeadHUD;
 import com.silvia.wonderwomanplatformgame.HUDs.PauseHUD;
-import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
-import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
+import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
+import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
 import com.silvia.wonderwomanplatformgame.World.MapOne;
-import com.silvia.wonderwomanplatformgame.World.WorldObjectCollisionListener;
 import com.silvia.wonderwomanplatformgame.World.WorldObjectsBuilder;
-
+import com.silvia.wonderwomanplatformgame.World.WorldObjectCollisionListener;
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
-
 /**
- * Created by silvia on 11/10/2017.
+ * Created by silvia on 11/23/2017.
  */
-
 public class GameScreen implements Screen{
+    public WonderWomanGame game;
 
-    private WonderWomanGame game;
     private OrthographicCamera gamecamera; //what follows along in our game came
     private Viewport gamePort;
     private PointsTracker pointsTracker;
     private PlayHUD hud;
     private DeadHUD deadHud;
     private PauseHUD pauseHUD;
+
     private TmxMapLoader maploader;//loaded map into our world
     private TiledMap map; //reference to the map
     private OrthogonalTiledMapRenderer renderer; // rendered our map to the screen
+
     //Box2D variables
     private World world;//
     private Box2DDebugRenderer b2dr; //givs up graphiccal representation of our fixtures in our world
-    private WonderWomanCharacter player1;
 
-
-    public HudState hudState;
     public enum HudState {
         PLAY,
         PAUSE,
         DEAD
     }
 
+    public HudState hudState;
+
+    private static WonderWomanCharacter player1;
+
     //making a constructor because sending game to screen
     public GameScreen(WonderWomanGame game){
         this.game = game;
+        this.hudState = HudState.PLAY;
         gamecamera = new OrthographicCamera();
         gamePort = new FitViewport(WonderWomanGame.virtualwidth/ WonderWomanGame.PPM,WonderWomanGame.virtualheight/WonderWomanGame.PPM, gamecamera);
+
         pointsTracker = new PointsTracker();
+        pointsTracker.setScoreboardFromFile();
+
         hud = new PlayHUD(game.batch, this);
+        deadHud = new DeadHUD(game.batch, this);
+        pauseHUD = new PauseHUD(game.batch, this);
 
         setGameMap(MapOne.mapFilePath);
         setGameCamera();
@@ -67,6 +74,7 @@ public class GameScreen implements Screen{
 
         player1 = WonderWomanCharacter.getInstance();
         player1.init(world);
+
 
         world.setContactListener(new WorldObjectCollisionListener());
     }
@@ -84,7 +92,7 @@ public class GameScreen implements Screen{
     private void setGameWorld() {
         world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         b2dr = new Box2DDebugRenderer();//
-        new WorldObjectsBuilder(world, map, pointsTracker);
+        new WorldObjectsBuilder(world, map, this);
     }
 
     @Override
@@ -93,28 +101,120 @@ public class GameScreen implements Screen{
     }
 
     public void handleInput(float dt){
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            player1.jump();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.K)) {
+            System.out.println("Dealing 10k Damage to Player 1!");
+            player1.receiveDamage(10000);
         }
-        //want to know if they are holding it down thats why its not just,  and want to check that the person is not going a faster speed
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1.characterSprite.b2body.getLinearVelocity().x <= 2) {
-            player1.walkRight();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+            this.dispose();
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1.characterSprite.b2body.getLinearVelocity().x >= -2) {
-            player1.walkLeft();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+            // If the HUD State is NOT DEAD (PLAY)
+            if (this.hudState == HudState.PLAY && this.hudState != HudState.PAUSE) {
+                this.hud.pausePressed();
+                this.hudState = HudState.DEAD;
+                this.deadHud.showDeadHud();
+                // OTHERWISE... if it's DEAD...
+            } else if (this.hudState == HudState.DEAD) {
+                this.hudState = HudState.PLAY;
+                this.hud.resume();
+                this.deadHud.hideDeadHud();
+            }
+        }
+
+        // If P is pressed, pause the game!
+        if(Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            game.setScreen(new MainMenuScreen(game));
+        }
+
+        // If P is pressed, pause the game!
+        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            // If the HUD State is NOT DEAD, and is PLAY, then PAUSE
+            if (this.hudState == HudState.PLAY && this.hudState != HudState.DEAD) {
+                this.hud.pausePressed();
+                this.pauseHUD.bringUpPauseHUD();
+                // OTHERWISE... if it's PAUSE...
+            } else if (this.hudState == HudState.PAUSE) {
+                this.hud.resume();
+            }
+        }
+
+        // Character Movement keys for if the game is playing
+        if (hudState == HudState.PLAY) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                player1.jump();
+            }
+            //want to know if they are holding it down thats why its not just,  and want to check that the person is not going a faster speed
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1.characterSprite.b2body.getLinearVelocity().x <= 2) {
+                player1.walkRight();
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1.characterSprite.b2body.getLinearVelocity().x >= -2) {
+                player1.walkLeft();
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.J)) {
+                player1.punch();
+            }
+            if(Gdx.input.isKeyPressed(Input.Keys.H )) {
+                player1.kick();
+            }
         }
     }
 
+    public void playIsPaused() {
+        for (Actor a : hud.stage.getActors()) {
+            a.setVisible(true);
+        }
+        this.hudState = HudState.PAUSE;
+    }
+
+    public void unpause() {
+        for (Actor a : pauseHUD.stage.getActors()) {
+            a.setVisible(false);
+        }
+        this.hudState = HudState.PLAY;
+    }
+
+    public void playResumed() {
+        for (Actor a : hud.stage.getActors()) {
+            a.setVisible(true);
+        }
+        this.hudState = HudState.PLAY;
+    }
+
+    public PointsTracker getPointsTracker() {return this.pointsTracker;}
+
+    public void exit() {
+        this.dispose();
+    }
 
     public void update(float dt){//updating of gameworld
         //check for key and mouse clicking
         handleInput(dt);//deleta time
 
-        world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
+        //in order for box2d to execture our physics simulation we need to tell it to
+        //calcaltute our update per second
 
-        player1.characterSprite.update(dt);
-        hud.update(dt, pointsTracker.getScore());
+        if (this.hudState == HudState.PLAY) {
+            world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
+            player1.characterSprite.update(dt);
 
+            hud.update(dt, pointsTracker.getScore());
+        }
+
+        // update camera at ever iteration of game cycle
+
+        deadHud.update(dt);
+        pauseHUD.update(dt);
+
+        if (player1.status == Character.CharacterLivingStatus.DEAD) {
+            this.hud.pausePressed();
+            this.hudState = HudState.DEAD;
+            this.deadHud.showDeadHud();
+        }
+
+        // everytime our character moves we want to track him with our gamecam
+        // gamecamera.position.x = player1.characterSprite.b2body.getPosition().x;
         gamecamera.position.x = player1.getXPosition();
         gamecamera.update();
         renderer.setView(gamecamera); //render what our game cam can see
@@ -132,15 +232,39 @@ public class GameScreen implements Screen{
         renderer.render();// after game clears there needs to render
 
         //render all the objects inside the game for the fictures and bodies
-        b2dr.render(world, gamecamera.combined);
+//        b2dr.render(world, gamecamera.combined);
 
         game.batch.setProjectionMatrix(gamecamera.combined);
         game.batch.begin();
         player1.characterSprite.draw(game.batch);
+
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
+        game.batch.setProjectionMatrix(deadHud.stage.getCamera().combined);
+        game.batch.setProjectionMatrix(pauseHUD.stage.getCamera().combined);
+        if (this.hudState == HudState.PLAY) {
+            hud.stage.draw();
+            for (Actor a : hud.stage.getActors()) {
+                a.setVisible(true);
+            }
+            for (Actor a : deadHud.stage.getActors()) {
+                a.setVisible(false);
+            }
+            for (Actor a : pauseHUD.stage.getActors()) {
+                a.setVisible(false);
+            }
+        } else if (this.hudState == HudState.DEAD) {
+            deadHud.stage.draw();
+            for (Actor a : deadHud.stage.getActors()) {
+                a.setVisible(true);
+            }
+        } else if (this.hudState == HudState.PAUSE) {
+            pauseHUD.stage.draw();
+            for (Actor a : pauseHUD.stage.getActors()) {
+                a.setVisible(true);
+            }
+        }
     }
 
     @Override
@@ -163,6 +287,16 @@ public class GameScreen implements Screen{
 
     }
 
+    public void gameoverScreen() {
+        game.setScreen(new GameOverScreen(this.game));
+        this.dispose();
+    }
+
+    public void mainMenuScreen() {
+        game.setScreen(new MainMenuScreen(game));
+        this.dispose();
+    }
+
     @Override
     public void dispose() {
         map.dispose();
@@ -170,7 +304,7 @@ public class GameScreen implements Screen{
         world.dispose();
         b2dr.dispose();
         hud.dispose();
+        pauseHUD.dispose();
+        deadHud.dispose();
     }
 }
-
-

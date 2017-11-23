@@ -1,42 +1,100 @@
 package com.silvia.wonderwomanplatformgame.PointsTracker;
 
+import com.silvia.wonderwomanplatformgame.WonderWomanGame;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PointsTracker {
-    public static int score;
+    public static int currentScore;
     public static List<String> scoreboard;
 
     public PointsTracker() {
         this(0);
     }
 
-    public PointsTracker(int score) {
-        System.out.println("Initialized Points Tracker with initial score of: " + score);
-        this.score = score;
+    public PointsTracker(int currentScore) {
+//        System.out.println("Initialized Points Tracker with initial currentScore of: " + currentScore);
+        this.currentScore = currentScore;
         this.scoreboard = new ArrayList<String>();
     }
 
-    public int addToScore(int pointsToAdd) {
-        // Add logic later to catch negative values or other invalid values.
+    public int addToCurrentScore(int pointsToAdd) {
+        // TODO Add logic later to catch negative values or other invalid values.
 
-        this.score += pointsToAdd;
-        return this.score;
+        this.currentScore += pointsToAdd;
+        return this.currentScore;
     }
 
     public int getScore() {
-        return this.score;
+        return this.currentScore;
+    }
+    public List<String> getScoreboard() {
+        return this.scoreboard;
     }
 
     public int setScore(int newScore) {
-        // Again, catch bad stuff here.
+        // TODO Again, catch negative / invalid point values here.
 
-        this.score = newScore;
-        return this.score;
+        this.currentScore = newScore;
+        return this.currentScore;
     }
 
-    public List<String> updateScoreboard(String name, int score) {
-        this.scoreboard.add(name + ": " + score);
+    // Takes current Player Name and their currentScore and adds it to the scoreboard list as a string
+    public List<String> addToScoreboard(String name, int score) {
+        scoreboard.add(name + ": " + score);
         return scoreboard;
+    }
+
+    public void updateScoreboard() {
+        addToScoreboard(WonderWomanGame.playerName, this.currentScore);
+    }
+
+    public void saveScore() throws IOException {
+        FileWriter out = null;
+
+        try {
+            out = new FileWriter("scores.txt");
+            for(String score: scoreboard) {
+                out.write(score+'\n');
+            }
+        } finally {
+            if (out != null) {
+                out.close();
+            }
+        }
+    }
+
+    public List<String> readScore() throws IOException {
+        BufferedReader in = null;
+        List<String> tempScoreboard = new ArrayList<String>();
+
+        try {
+            in = new BufferedReader(new FileReader("scores.txt"));
+            String line;
+
+            int c;
+            while ((line = in.readLine()) != null) {
+                tempScoreboard.add(line);
+            }
+        } finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+
+        return tempScoreboard;
+    }
+
+    public void setScoreboardFromFile() {
+        try {
+            this.scoreboard = readScore();
+        } catch (Exception io) {
+            System.out.println(io);
+        }
     }
 }

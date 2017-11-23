@@ -29,23 +29,23 @@ public class GameScreenTest extends GameTest {
     @Test
     public void testSetMap() {
         TmxMapLoader mapLoader = new TmxMapLoader();
-        assertNotNull(mapLoader.load(System.getProperty("user.dir") + "\\android\\assets\\" + MapOne.mapFilePath));
+        assertNotNull(mapLoader.load(MapOne.mapFilePath));
     }
 
     @Test
     public void testSetGameCamera() {
         OrthographicCamera gamecamera = new OrthographicCamera();
-        FitViewport gamePort = new FitViewport(WonderWomanGame.virtualwidth / WonderWomanGame.PPM, WonderWomanGame.virtualheight / WonderWomanGame.PPM, gamecamera);
-        gamecamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
+        FitViewport gamePort = new FitViewport(WonderWomanGame.virtualwidth/ WonderWomanGame.PPM,WonderWomanGame.virtualheight/WonderWomanGame.PPM, gamecamera);
+        gamecamera.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight()/2 , 0);
         assertEquals(3.2, gamePort.getWorldWidth() / 2, 0.1);
-        assertEquals(2.0, gamePort.getWorldHeight() / 2, 0.1);
+        assertEquals(2.0, gamePort.getWorldHeight()/2, 0.1);
     }
 
     @Test
     public void testSetWorld() {
-        World world = new World(new Vector2(0, -10), true);// gravity, none for now, sleep objects at rest
+        World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
-        TiledMap map = mapLoader.load(System.getProperty("user.dir") + "\\android\\assets\\" + MapOne.mapFilePath);
+        TiledMap map = mapLoader.load(MapOne.mapFilePath);
         PointsTracker pointsTracker = new PointsTracker();
         assertNotNull(new WorldObjectsBuilder(world, map, pointsTracker));
     }
@@ -54,7 +54,7 @@ public class GameScreenTest extends GameTest {
     public void testHandleInput() {
         World world = new World(new Vector2(0,0 ), true);// gravity, none for now, sleep objects at rest
         WonderWomanCharacter player = WonderWomanCharacter.getInstance();
-        player.init(world, System.getProperty("user.dir")+"\\android\\assets\\ww.png");
+        player.init(world, "ww.png");
         double x = 1;
         double y = 0;
 
@@ -86,27 +86,24 @@ public class GameScreenTest extends GameTest {
             assertEquals(new Vector2(0,4), player.characterSprite.b2body.getLinearVelocity());
             assertEquals(new Vector2(0,player.getJumpSpeed()), player.characterSprite.b2body.getLinearVelocity());
         }
-
-    }
-
-    @Test
-    public void testRender() {
-        Texture img = new Texture(System.getProperty("user.dir") + "\\android\\assets\\ww.png");
-        assertNotNull(img);
     }
 
     @Test
     public void testUpdate() {
-
-
         int time = 300;
 
         PlayHUD playHUD = new PlayHUD();
         assertEquals(true, playHUD.countdownLabel.textEquals("300"));
 
         for (int i = 0; i <= time; i++) {
-            assertEquals((time - i), playHUD.worldTimer, 0.1);
+            assertEquals((time-i), playHUD.worldTimer, 0.1);
             playHUD.update(1);
         }
+    }
+
+    @Test
+    public void testRender() {
+        Texture img = new Texture("ww.png");
+        assertNotNull(img);
     }
 }

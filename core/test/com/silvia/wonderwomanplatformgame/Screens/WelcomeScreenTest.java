@@ -1,5 +1,7 @@
 package com.silvia.wonderwomanplatformgame.Screens;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.silvia.wonderwomanplatformgame.GameTest;
 
 import org.junit.Test;
@@ -11,43 +13,12 @@ import static org.junit.Assert.*;
  */
 public class WelcomeScreenTest extends GameTest {
     @Test
-    public void show() throws Exception {
+    public void testBackgroundImage() {
+        Texture backgroundImage = new Texture("wwspl.png");
+        assertNotNull(backgroundImage);
 
-    }
-
-    @Test
-    public void render() throws Exception {
-
-    }
-
-    @Test
-    public void update() throws Exception {
-
-    }
-
-    @Test
-    public void resize() throws Exception {
-
-    }
-
-    @Test
-    public void pause() throws Exception {
-
-    }
-
-    @Test
-    public void resume() throws Exception {
-
-    }
-
-    @Test
-    public void hide() throws Exception {
-
-    }
-
-    @Test
-    public void dispose() throws Exception {
-
+        Sprite imageSprite = new Sprite(backgroundImage);
+        assertNotNull(imageSprite);
     }
 
 }

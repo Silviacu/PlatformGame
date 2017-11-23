@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 import com.silvia.wonderwomanplatformgame.World.WorldObjectCollisionListener;
 
@@ -18,12 +19,13 @@ import com.silvia.wonderwomanplatformgame.World.WorldObjectCollisionListener;
 
 public class WonderWomanSprite extends CharacterSprite {
 
+    public WWSpriteState currentState;
+    public WWSpriteState previousState;
     public World world; // the world wonderwoman will live in
-
-    public enum State {FALLING , JUMPING , IDLE, RUNNING, KICKING, PUNCHING, THROWING};
-    public State currentState;
-    public State previousState;
     public Body b2body;
+    private float stateTimer;
+    private boolean runningRight;
+    private TextureRegion ww_stand;
     public static final String wwTexture = "ww.png";
 
     // AVAILABLE WONDERWOMAN ACTION ANIMATIONS
@@ -33,16 +35,18 @@ public class WonderWomanSprite extends CharacterSprite {
     private Animation<TextureRegion> wwKick;
     private Animation<TextureRegion> wwPunch;
 
+    private Array<TextureRegion> wwFrames = new Array<TextureRegion>();
+    public enum WWSpriteState {JUMPING , IDLE, RUNNING, KICKING, PUNCHING};
+
+
     public Animation<TextureRegion> getWwIdle() { return wwIdle; }
     public Animation<TextureRegion> getWwRun() { return wwRun; }
     public Animation<TextureRegion> getWwJump() { return wwJump; }
     public Animation<TextureRegion> getWwKick() { return wwKick; }
     public Animation<TextureRegion> getWwPunch() { return wwPunch; }
-
-    private float stateTimer;
-    private boolean runningRight;
-
-    private TextureRegion ww_stand;
+    public void setSprite(WWSpriteState spriteState) {
+        this.currentState = spriteState;
+    }
 
     // constructor
     public WonderWomanSprite(World world){
@@ -53,8 +57,9 @@ public class WonderWomanSprite extends CharacterSprite {
     public WonderWomanSprite(World world, String targetTexture){
         super(world, targetTexture);
         this.world = world;
-        currentState = State.IDLE;
-        previousState = State.IDLE;
+
+        currentState = WWSpriteState.IDLE;
+        previousState = WWSpriteState.IDLE;
         stateTimer = 0;
         runningRight = true;
 
@@ -68,11 +73,13 @@ public class WonderWomanSprite extends CharacterSprite {
 
     }
 
-    private Array<TextureRegion> wwFrames = new Array<TextureRegion>();
+
     private void setupAnimationFrames() {// test in progress need to finish (tedious)
         setupIdleFrames();
         setupRunningFrames();
         setupJumpingFrames();
+        setupPunchingFrames();
+        setupKickingFrames();
     }
 
     private void setupIdleFrames() {
@@ -110,11 +117,44 @@ public class WonderWomanSprite extends CharacterSprite {
         wwFrames.clear();
     }
 
+    private void setupKickingFrames() {
+        // KICKING ANIMATION
+
+        for(int i =0; i <3; i++){
+            wwFrames.add(new TextureRegion(getTexture(), 180 + (i*60), 700, 60, 54));
+        }
+        wwFrames.add(new TextureRegion(getTexture(), 180 + 0, 750, 60, 54));
+
+        wwKick = new Animation(0.2f, wwFrames);
+        wwFrames.clear();
+    }
+    private void setupPunchingFrames() {
+        // PUNCHING ANIMATION
+
+        for(int i =0; i <3; i++){
+            wwFrames.add(new TextureRegion(getTexture(), 180 + (i*60), 810, 60, 54));
+        }
+        wwFrames.add(new TextureRegion(getTexture(), 180 + 0, 860, 60, 54));
+
+        wwPunch = new Animation(0.2f, wwFrames);
+        wwFrames.clear();
+    }
+
+
     public void update(float dt) {// working with function above for testing
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion(getFrame(dt));
 
         checkCollision();
+
+        if (WonderWomanCharacter.getInstance().invulnerabilityTimer > 0)
+            WonderWomanCharacter.getInstance().invulnerabilityTimer--;
+
+        if (WonderWomanCharacter.getInstance().punchTimer > 0)
+            WonderWomanCharacter.getInstance().punchTimer--;
+
+        if (WonderWomanCharacter.getInstance().kickTimer > 0)
+            WonderWomanCharacter.getInstance().kickTimer--;
     }
 
     private void checkCollision() {
@@ -127,12 +167,17 @@ public class WonderWomanSprite extends CharacterSprite {
         TextureRegion region;
         switch(currentState){
             case JUMPING:
-                region = wwJump.getKeyFrame(stateTimer);
+                region = wwJump.getKeyFrame(stateTimer, true);
                 break;
             case RUNNING:
                 region = wwRun.getKeyFrame(stateTimer, true);
                 break;
-            case FALLING:
+            case KICKING:
+                region = wwKick.getKeyFrame(stateTimer, true);
+                break;
+            case PUNCHING:
+                region = wwPunch.getKeyFrame(stateTimer, true);
+                break;
             case IDLE:
             default:
                 region = wwIdle.getKeyFrame(stateTimer, true);
@@ -156,19 +201,24 @@ public class WonderWomanSprite extends CharacterSprite {
         return region;
     }
 
-    public void setSprite(State spriteState) {
-        this.currentState = spriteState;
-    }
 
-    private State getState() {
-        if(b2body.getLinearVelocity().y >0 || (b2body.getLinearVelocity().y <0 && previousState == State.JUMPING))
-            return State.JUMPING;
-        else if(b2body.getLinearVelocity().y <0)
-            return State.FALLING;
+    public WWSpriteState getState() {
+        if(WonderWomanCharacter.getInstance().punchTimer > 0) {
+            return WWSpriteState.PUNCHING;
+        }
+        if(WonderWomanCharacter.getInstance().kickTimer > 0) {
+            return WWSpriteState.KICKING;
+        }
+        if(b2body.getLinearVelocity().y >0 || (b2body.getLinearVelocity().y <0 && previousState == WWSpriteState.JUMPING))
+            return WWSpriteState.JUMPING;
         else if(b2body.getLinearVelocity().x !=0)
-            return State.RUNNING;
+            return WWSpriteState.RUNNING;
+        else if(b2body.getLinearVelocity().x !=0)// not sure look over these
+            return WWSpriteState.KICKING;
+        else if(b2body.getLinearVelocity().x !=0)
+            return WWSpriteState.PUNCHING;
         else
-            return State.IDLE;
+            return WWSpriteState.IDLE;
     }
 
     @Override
@@ -191,8 +241,9 @@ public class WonderWomanSprite extends CharacterSprite {
                         WonderWomanGame.HEALTH_BIT |
                         WonderWomanGame.POWERUP_BIT |
                         WonderWomanGame.SPIKE_BIT |
-                        WonderWomanGame.ZONEFALL_BIT|
-                        WonderWomanGame.ZONEEND_BIT;//// what wonderwoman can collide with
+                        WonderWomanGame.ZONEFALL_BIT |
+                        WonderWomanGame.ZONEEND_BIT ;//// what wonderwoman can collide with
+
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(5/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
         fdef.shape = shape;
@@ -202,6 +253,6 @@ public class WonderWomanSprite extends CharacterSprite {
         x_sensor.setAsBox(6/WonderWomanGame.PPM, 26/WonderWomanGame.PPM);
         fdef.shape = x_sensor;
         fdef.isSensor = true;
-        b2body.createFixture(fdef).setUserData("body_sensor");
+        b2body.createFixture(fdef).setUserData(this);
     }
 }
