@@ -13,6 +13,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.silvia.wonderwomanplatformgame.Characters.Character;
+import com.silvia.wonderwomanplatformgame.Characters.Enemies.EnemyBig;
+import com.silvia.wonderwomanplatformgame.Characters.Enemies.EnemyCrow;
+import com.silvia.wonderwomanplatformgame.Characters.Enemies.EnemyZombie;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.DeadHUD;
 import com.silvia.wonderwomanplatformgame.HUDs.PauseHUD;
@@ -53,6 +56,11 @@ public class GameScreen implements Screen{
     public HudState hudState;
 
     private static WonderWomanCharacter player1;
+    private static EnemyZombie zombie1;
+    // private static EnemyBig big1;
+    private static EnemyBig big2;
+    private static EnemyCrow crow1;
+
 
     //making a constructor because sending game to screen
     public GameScreen(WonderWomanGame game){
@@ -74,6 +82,10 @@ public class GameScreen implements Screen{
 
         player1 = WonderWomanCharacter.getInstance();
         player1.init(world);
+
+        zombie1 = new EnemyZombie("Zombie 1", 1, world, 500, 500);
+        crow1 = new EnemyCrow("Crow 1", 1, world, 1500, 300);
+        big2 = new EnemyBig("Big 2", 1, world, 2500, 500);
 
 
         world.setContactListener(new WorldObjectCollisionListener());
@@ -198,7 +210,10 @@ public class GameScreen implements Screen{
         if (this.hudState == HudState.PLAY) {
             world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
             player1.characterSprite.update(dt);
-
+            zombie1.update(dt);
+            // big1.update(dt);
+            big2.update(dt);
+            crow1.update(dt);
             hud.update(dt, pointsTracker.getScore());
         }
 
@@ -237,7 +252,10 @@ public class GameScreen implements Screen{
         game.batch.setProjectionMatrix(gamecamera.combined);
         game.batch.begin();
         player1.characterSprite.draw(game.batch);
-
+        zombie1.zombieSprite.draw(game.batch);
+        crow1.crowSprite.draw(game.batch);
+        //big1.bigSprite.draw(game.batch);
+        big2.bigSprite.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
@@ -292,10 +310,6 @@ public class GameScreen implements Screen{
         this.dispose();
     }
 
-    public void mainMenuScreen() {
-        game.setScreen(new MainMenuScreen(game));
-        this.dispose();
-    }
 
     @Override
     public void dispose() {

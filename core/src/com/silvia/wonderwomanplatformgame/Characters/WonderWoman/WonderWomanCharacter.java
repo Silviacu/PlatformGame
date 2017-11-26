@@ -14,11 +14,12 @@ import com.silvia.wonderwomanplatformgame.Sprites.WonderWomanSprite;
 
 public class WonderWomanCharacter extends Character {
 
-    private float jumpSpeed = 4f;
+    private float jumpSpeed = 4.2f;
     private float walkSpeed = .1f;
     public int invulnerabilityTimer = 0;
     public int punchTimer;
     public int kickTimer;
+    public int jumpTimer =0;
 
     public String characterName = "Wonder Woman";
     public WonderWomanSprite characterSprite;
@@ -90,7 +91,11 @@ public class WonderWomanCharacter extends Character {
     public void jump() {
         //force impluse which is an imditate change ins speed, x y of impluse (y for jump), worldcenter is where in the bosy we wentto apply center/force if its anotehr then it will have a torque
         //third parameter wakes the objects up
-        characterSprite.b2body.applyLinearImpulse(new Vector2(0, jumpSpeed), characterSprite.b2body.getWorldCenter(), true);
+        if (characterSprite.b2body.getLinearVelocity().y <= 0 && jumpTimer == 0) {
+            characterSprite.b2body.applyLinearImpulse(new Vector2(0, jumpSpeed), characterSprite.b2body.getWorldCenter(), true);
+            characterSprite.setSprite(WonderWomanSprite.WWSpriteState.JUMPING);
+            jumpTimer = 45;
+        }
     }
 
     public void walkRight() {

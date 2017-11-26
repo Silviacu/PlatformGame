@@ -11,19 +11,19 @@ public class EnemyCharacter extends Character {
     public float enemyContactDamage = 0;
 
     public EnemyCharacter() {
-
+        this("Default Enemy Character", 1);
     }
 
     public EnemyCharacter(String name, float contactDamage) {
+        this.characterName = name;
+        this.enemyContactDamage = contactDamage;
     }
 
-    @Override
     public void renderSprite(World world) {
         super.renderSprite(world);
     }
 
-    public void onTouch(Character touchedCharacter) {
-
+    public void dealContactDamage(Character targetCharacter) {
+        this.dealDamage(this.enemyContactDamage, targetCharacter);
     }
 }
-

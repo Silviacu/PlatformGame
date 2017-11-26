@@ -155,6 +155,9 @@ public class WonderWomanSprite extends CharacterSprite {
 
         if (WonderWomanCharacter.getInstance().kickTimer > 0)
             WonderWomanCharacter.getInstance().kickTimer--;
+
+        if (WonderWomanCharacter.getInstance().jumpTimer > 0)
+            WonderWomanCharacter.getInstance().jumpTimer--;
     }
 
     private void checkCollision() {

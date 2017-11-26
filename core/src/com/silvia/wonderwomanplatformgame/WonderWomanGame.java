@@ -33,6 +33,8 @@ public class WonderWomanGame extends Game {
 	public static final short POWERUP_BIT = 9;
 	public static final short ZONEEND_BIT = 10;
 	public static final short ZONEFALL_BIT = 11;
+	public static final short ENEMY_BIT = 12;
+	public static final short BIG_BIG_BIT = 13;
 
 	@Override
 	public void create () {
