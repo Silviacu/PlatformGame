@@ -24,23 +24,20 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
 3. In Android Stuidos click on the android button next to the green triangle
       ![](https://imgur.com/PmvMha3.png)
 
-3. Click Edit Configurations 
+4. Click Edit Configurations 
       ![](https://imgur.com/vn1IUEN.png)
       
-4. Click the + sign and then click on "Application"
+5. Click the + sign and then click on "Application"
       ![](https://imgur.com/7EQ65bs.png)
     
-5. In the Name Type "Desktop" and then click next to "main claa" text box the 3 dots
+6. In the Name Type "Desktop" and then click next to "main claa" text box the 3 dots
      ![](https://imgur.com/0eOVsN3.png)
   
-6. Click the DesktopLauncher (com.silvia.wonderwomanplatformgame.desktop) desktop and then click "ok"
+7. Click the DesktopLauncher (com.silvia.wonderwomanplatformgame.desktop) desktop and then click "ok"
      ![](https://imgur.com/H53KHxS.png)
-  
-7. Add \android\assets in the "Working Directory" Text tab
-     ![](https://imgur.com/jI7X7lk.png)
 
 8. Make sure the "JRE" tab is set to default (1.8 SDK) and then click "Apply" and "Ok"
-     ![](https://imgur.com/hY7tRJY.png)
+     ![](https://imgur.com/wz3IVg5.png)
 
 9. Let Gradle sync and restart Android studios 
 
