@@ -54,7 +54,7 @@ public class WonderWomanCharacterTest extends GameTest {
         assertEquals(new Vector2(0.32f,3.2f), player.characterSprite.b2body.getPosition());
         player.jump();
         player.characterSprite.update(100);
-        assertEquals(new Vector2(0,4), player.characterSprite.b2body.getLinearVelocity());
+        assertEquals(new Vector2(0,4.2f), player.characterSprite.b2body.getLinearVelocity());
         assertEquals(new Vector2(0,player.getJumpSpeed()), player.characterSprite.b2body.getLinearVelocity());
     }
 }
