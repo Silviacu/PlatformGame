@@ -33,6 +33,9 @@ public class WonderWomanCharacter extends Character {
     public float getJumpSpeed() {
         return jumpSpeed;
     }
+    public void setJump(float jump) {
+        this.jumpSpeed = jump;
+    }
     public float getWalkSpeed() {
         return walkSpeed;
     }

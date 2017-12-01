@@ -12,7 +12,7 @@ public class JumpPowerupState implements CharacterState {
 
     @Override
     public String getStateName() {
-        return null;
+        return "Jump_Power";
     }
 
     @Override

@@ -12,13 +12,14 @@ public class AttackPowerupState implements CharacterState{
 
     @Override
     public String getStateName() {
-        return null;
+        return "Attack_Power";
     }
 
     @Override
     public float getJump(float jump) {
         return 0;
     }
+
 
     @Override
     public float getDamage(float damage) {

@@ -13,7 +13,7 @@ public class NormalState implements CharacterState{
 
     @Override
     public String getStateName() {
-        return null;
+        return "Normal";
     }
 
     @Override
