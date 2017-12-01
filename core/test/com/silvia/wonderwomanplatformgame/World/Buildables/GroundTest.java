@@ -28,7 +28,7 @@ public class GroundTest extends GameTest{
     public void testGround() {
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
-        TiledMap map = mapLoader.load(System.getProperty("user.dir")+ "\\android\\assets\\" + MapOne.mapFilePath); // Assume if World One is Loaded
+        TiledMap map = mapLoader.load(MapOne.mapFilePath); // Assume if World One is Loaded
         Ground.build_ground(world, map);
 
         int numberOfGroundObjects = 0;
@@ -36,10 +36,12 @@ public class GroundTest extends GameTest{
         for(MapObject object : map.getLayers().get(mapResources.obj_ground).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            bodydefinition.type = BodyDef.BodyType.StaticBody;
+            bodydefinition.type = BodyDef.BodyType.StaticBody; //dynamic player affected by graphics and phsycs
+            //staticbody doesnt move can only move programmly, not affected by forces
+            //kinematic canf be afftect by forces only velocity(moving platofrms)
             bodydefinition.position.set(((rect.getX() + rect.getWidth() /2)/ WonderWomanGame.PPM),(rect.getY() +rect.getHeight()/2) /WonderWomanGame.PPM );
             body = world.createBody(bodydefinition);
-            shape.setAsBox(rect.getWidth() /2 / WonderWomanGame.PPM, rect.getHeight() /2 / WonderWomanGame.PPM );
+            shape.setAsBox(rect.getWidth() /2 / WonderWomanGame.PPM, rect.getHeight() /2 /WonderWomanGame.PPM );
             fdef.shape = shape;
             assertNotNull(body.createFixture(fdef));// add ficture to the body
             numberOfGroundObjects++;

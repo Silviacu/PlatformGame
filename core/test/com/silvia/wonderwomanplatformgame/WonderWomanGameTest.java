@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class WonderWomanGameTest extends GameTest {
     @Test
     public void checkAssets() {
-        Texture asset1 = new Texture(System.getProperty("user.dir") + "\\android\\assets\\classical_ruin_tiles5.png");
+        Texture asset1 = new Texture("classical_ruin_tiles5.png");
         assertNotNull(asset1);
     }
 

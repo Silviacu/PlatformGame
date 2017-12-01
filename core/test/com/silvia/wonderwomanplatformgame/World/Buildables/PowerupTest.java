@@ -28,7 +28,7 @@ public class PowerupTest extends GameTest {
     public void build_powerups_Test() throws Exception {
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
-        TiledMap map = mapLoader.load(System.getProperty("user.dir")+ "\\android\\assets\\" + MapOne.mapFilePath); // Assume if World One is Loaded
+        TiledMap map = mapLoader.load(MapOne.mapFilePath); // Assume if World One is Loaded
 
 
         int powerups_objects = 0;

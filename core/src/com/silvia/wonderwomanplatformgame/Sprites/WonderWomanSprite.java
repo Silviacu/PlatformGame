@@ -245,8 +245,9 @@ public class WonderWomanSprite extends CharacterSprite {
                         WonderWomanGame.POWERUP_BIT |
                         WonderWomanGame.SPIKE_BIT |
                         WonderWomanGame.ZONEFALL_BIT |
-                        WonderWomanGame.ZONEEND_BIT ;//// what wonderwoman can collide with
-
+                        WonderWomanGame.ZONEEND_BIT |//// what wonderwoman can collide with
+                        WonderWomanGame.ENEMY_BIT |
+                        WonderWomanGame.BIG_BIG_BIT;
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(5/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
         fdef.shape = shape;

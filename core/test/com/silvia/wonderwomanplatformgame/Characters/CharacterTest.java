@@ -16,7 +16,7 @@ public class CharacterTest extends GameTest {
     @Test
     public void renderSprite() throws Exception {
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
-        CharacterSprite characterSprite = new CharacterSprite(world, System.getProperty("user.dir")+ "\\android\\assets\\" + "ww.png");
+        CharacterSprite characterSprite = new CharacterSprite(world, "ww.png");
         assertNotNull(characterSprite);
     }
 

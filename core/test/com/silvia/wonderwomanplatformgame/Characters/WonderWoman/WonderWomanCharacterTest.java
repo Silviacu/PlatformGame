@@ -22,12 +22,12 @@ public class WonderWomanCharacterTest extends GameTest {
 
     @Before
     public void initWWC() {
-        player.init(world, System.getProperty("user.dir")+"\\android\\assets\\ww.png");
+        player.init(world, "ww.png");
     }
 
     @Test
     public void renderSpriteTest() throws Exception {
-        Texture img = new Texture(System.getProperty("user.dir")+"\\android\\assets\\ww.png");
+        Texture img = new Texture("ww.png");
         assertNotNull(img);
     }
 

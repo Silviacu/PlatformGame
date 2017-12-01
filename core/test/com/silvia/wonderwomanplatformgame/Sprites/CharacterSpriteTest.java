@@ -18,13 +18,13 @@ public class CharacterSpriteTest extends GameTest {
     @Test
     public void testSpriteCreation() {
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
-        CharacterSprite sprite = new CharacterSprite(world, System.getProperty("user.dir")+"\\android\\assets\\ww.png");
+        CharacterSprite sprite = new CharacterSprite(world, "ww.png");
         assertNotNull(sprite);
     }
 
     @Test
     public void testHandler() {
-        Texture img = new Texture(System.getProperty("user.dir")+"\\android\\assets\\ww.png");
+        Texture img = new Texture("ww.png");
         assertNotNull(img);
     }
 

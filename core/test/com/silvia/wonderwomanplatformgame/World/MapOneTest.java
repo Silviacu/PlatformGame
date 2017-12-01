@@ -12,6 +12,6 @@ public class MapOneTest extends GameTest{
     @Test
     public void testMapOne() {
         TmxMapLoader mapLoader = new TmxMapLoader();
-        assertNotNull(mapLoader.load(System.getProperty("user.dir")+ "\\android\\assets\\" + MapOne.mapFilePath));
+        assertNotNull(mapLoader.load(MapOne.mapFilePath));
     }
 }

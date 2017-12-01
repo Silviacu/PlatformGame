@@ -28,7 +28,7 @@ public class ZoneEndTest extends GameTest {
 
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
-        TiledMap map = mapLoader.load(System.getProperty("user.dir")+ "\\android\\assets\\" + MapOne.mapFilePath); // Assume if World One is Loaded
+        TiledMap map = mapLoader.load(MapOne.mapFilePath); // Assume if World One is Loaded
 
 
         int zone_end_objects = 0;
