@@ -27,14 +27,12 @@ public class WonderWomanCharacter extends Character {
     private AttackCollection wwAttacks = new WonderWomanAttackCollection();
     private static WonderWomanCharacter instance = new WonderWomanCharacter();
 
-    public AttackCollection getWwAttacks() {
-        return wwAttacks;
+    public WonderWomanAttackCollection getWwAttacks() {
+        return (WonderWomanAttackCollection) this.attacks;
     }
-
     public float getJumpSpeed() {
         return jumpSpeed;
     }
-
     public float getWalkSpeed() {
         return walkSpeed;
     }
@@ -54,6 +52,7 @@ public class WonderWomanCharacter extends Character {
         this.attackDamage = 1;
         this.powerupStatus = new NormalState();
         renderSprite(world);
+        attacks = new WonderWomanAttackCollection();
     }
 
     public void init(World world, String textureFile) {
@@ -63,6 +62,7 @@ public class WonderWomanCharacter extends Character {
         this.punchTimer = 0;
         this.kickTimer = 0;
         renderSprite(world, textureFile);
+        attacks = new WonderWomanAttackCollection();
     }
 
     @Override

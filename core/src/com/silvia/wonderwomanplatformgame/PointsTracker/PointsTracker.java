@@ -54,6 +54,10 @@ public class PointsTracker {
         addToScoreboard(WonderWomanGame.playerName, this.currentScore);
     }
 
+    /**
+     * Saves the array scoreboard to a a local scores.txt file
+     * @throws IOException
+     */
     public void saveScore() throws IOException {
         FileWriter out = null;
 
@@ -69,6 +73,11 @@ public class PointsTracker {
         }
     }
 
+    /**
+     * reads the score from the local scores.txt file
+     * @return
+     * @throws IOException
+     */
     public List<String> readScore() throws IOException {
         BufferedReader in = null;
         List<String> tempScoreboard = new ArrayList<String>();
@@ -90,6 +99,9 @@ public class PointsTracker {
         return tempScoreboard;
     }
 
+    /**
+     * sets current scoreboard to the scoreboard from the file, updates current score board
+     */
     public void setScoreboardFromFile() {
         try {
             this.scoreboard = readScore();

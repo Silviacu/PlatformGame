@@ -2,6 +2,7 @@ package com.silvia.wonderwomanplatformgame.Characters.Enemies;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.AttackCollection.EnemyBigAttackCollection;
 import com.silvia.wonderwomanplatformgame.Characters.EnemyCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
 import com.silvia.wonderwomanplatformgame.Sprites.EnemyBigSprite;
@@ -20,9 +21,8 @@ public class EnemyBig extends EnemyCharacter {
     public int invulnerabilityTimer;
     private int enlargeTimer;
 
+
     public EnemyBigSprite bigSprite;
-
-
 
     public int getEnlargeTimer() { return enlargeTimer; }
     public void setEnlargeTimer(int newEnlargeTimer) { this.enlargeTimer = newEnlargeTimer; }
@@ -38,6 +38,7 @@ public class EnemyBig extends EnemyCharacter {
         this.facingLeft = true;
         this.invulnerabilityTimer = 0;
         this.enlargeTimer = 0;
+        this.attacks = new EnemyBigAttackCollection();
 
         bigSprite = new EnemyBigSprite(world, this, xposition, yposition);
     }
@@ -68,7 +69,7 @@ public class EnemyBig extends EnemyCharacter {
 
     public void enlarge() {
         enlargeTimer = 120;
-        enemyContactDamage = 5;
+        enemyContactDamage = ((EnemyBigAttackCollection) attacks).bigAttack.attackBaseDamage;
 
     }
 

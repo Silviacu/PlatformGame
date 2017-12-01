@@ -1,8 +1,10 @@
 package com.silvia.wonderwomanplatformgame.Characters;
 
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.AttackCollection.AttackCollection;
 import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
 import com.silvia.wonderwomanplatformgame.Sprites.CharacterSprite;
+import com.silvia.wonderwomanplatformgame.Characters.AttackCollection.AttackCollection;
 
 import com.badlogic.gdx.physics.box2d.World;
 import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
@@ -22,6 +24,7 @@ public class Character {
     public double attackDamage = 5.0;
     public int invulnerabilityTimer;
     public float health;
+    protected AttackCollection attacks;
 
     public CharacterSprite characterSprite;
     public CharacterLivingStatus status;

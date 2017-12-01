@@ -2,6 +2,7 @@ package com.silvia.wonderwomanplatformgame.Characters.Enemies;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.AttackCollection.EnemyZombieAttackCollection;
 import com.silvia.wonderwomanplatformgame.Characters.EnemyCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
 import com.silvia.wonderwomanplatformgame.Sprites.EnemyZombieSprite;
@@ -38,6 +39,7 @@ public class EnemyZombie extends EnemyCharacter {
         this.facingLeft = true;
         biteTimer = 0;
         this.invulnerabilityTimer = 0;
+        this.attacks = new EnemyZombieAttackCollection();
 
         zombieSprite = new EnemyZombieSprite(world, this, xposition, yposition);
     }
@@ -63,9 +65,7 @@ public class EnemyZombie extends EnemyCharacter {
 
     public void bite() {
         biteTimer = 120;
-
-        //TODO will be added later with attack collection, for crow and big as well
-        enemyContactDamage = 3;
+        enemyContactDamage = ((EnemyZombieAttackCollection)attacks).zombieAttack.attackBaseDamage;
 
     }
 

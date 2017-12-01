@@ -12,7 +12,7 @@ public class EnemyCrowAttackCollection implements AttackCollection {
     public String attackCollectionName = "";
     public List<CharacterAttack> attacks = new ArrayList<CharacterAttack>();
 
-    public CharacterAttack flyAttack = new CharacterAttack("Fly Attack", 2);
+    public CharacterAttack flyAttack = new CharacterAttack("Fly Attack", 6);
 
     public EnemyCrowAttackCollection() {
         this.attackCollectionName = "Enemy Crow Attacks";

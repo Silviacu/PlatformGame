@@ -12,7 +12,7 @@ public class WonderWomanAttackCollection implements AttackCollection {
     public String attackCollectionName = "";
     public List<CharacterAttack> attacks = new ArrayList<CharacterAttack>();
 
-    public CharacterAttack punchAttack = new CharacterAttack("Punch Attack", 2);
+    public CharacterAttack punchAttack = new CharacterAttack("Punch Attack", 1);
     public CharacterAttack kickAttack = new CharacterAttack("Kick Attack", 2);
 
     public WonderWomanAttackCollection() {

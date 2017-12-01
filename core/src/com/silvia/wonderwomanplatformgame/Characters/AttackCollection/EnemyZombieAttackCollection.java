@@ -13,7 +13,7 @@ public class EnemyZombieAttackCollection implements AttackCollection {
     public String attackCollectionName = "";
     public List<CharacterAttack> attacks = new ArrayList<CharacterAttack>();
 
-    public CharacterAttack zombieAttack = new CharacterAttack("Bite Attack", 2);
+    public CharacterAttack zombieAttack = new CharacterAttack("Bite Attack", 3);
 
     public EnemyZombieAttackCollection() {
         this.attackCollectionName = "Enemy Zombie Attacks";

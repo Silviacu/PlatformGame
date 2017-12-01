@@ -2,6 +2,7 @@ package com.silvia.wonderwomanplatformgame.Characters.Enemies;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.AttackCollection.EnemyCrowAttackCollection;
 import com.silvia.wonderwomanplatformgame.Characters.EnemyCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
 import com.silvia.wonderwomanplatformgame.Sprites.EnemyCrowSprite;
@@ -36,6 +37,7 @@ public class EnemyCrow extends EnemyCharacter {
         this.flyspeed = 1;
         this.facingLeft = true;
         this.invulnerabilityTimer = 0;
+        this.attacks = new EnemyCrowAttackCollection();
 
         crowSprite = new EnemyCrowSprite(world, this, xposition, yposition);
     }
@@ -61,7 +63,7 @@ public class EnemyCrow extends EnemyCharacter {
 
     public void swoop() {
         swoopTimer = 120;
-        enemyContactDamage =6;
+        enemyContactDamage =((EnemyCrowAttackCollection) attacks). flyAttack.attackBaseDamage;
         this.crowSprite.b2body.applyForce(0f, -50f, this.crowSprite.b2body.getWorldCenter().x, this.crowSprite.b2body.getWorldCenter().y, true);
     }
 

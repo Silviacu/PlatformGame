@@ -12,7 +12,7 @@ public class EnemyBigAttackCollection implements AttackCollection {
     public String attackCollectionName = "";
     public List<CharacterAttack> attacks = new ArrayList<CharacterAttack>();
 
-    public CharacterAttack bigAttack = new CharacterAttack("Big Attack", 4);
+    public CharacterAttack bigAttack = new CharacterAttack("Big Attack", 5);
 
     public EnemyBigAttackCollection() {
         this.attackCollectionName = "Enemy Big Attacks";
