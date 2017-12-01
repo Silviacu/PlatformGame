@@ -95,9 +95,9 @@ public class WonderWomanCharacter extends Character {
         //force impluse which is an imditate change ins speed, x y of impluse (y for jump), worldcenter is where in the bosy we wentto apply center/force if its anotehr then it will have a torque
         //third parameter wakes the objects up
         if (characterSprite.b2body.getLinearVelocity().y <= 0 && jumpTimer == 0) {
-            characterSprite.b2body.applyLinearImpulse(new Vector2(0, jumpSpeed), characterSprite.b2body.getWorldCenter(), true);
+            characterSprite.b2body.applyLinearImpulse(new Vector2(0, this.powerupStatus.getJump(jumpSpeed)), characterSprite.b2body.getWorldCenter(), true);
             characterSprite.setSprite(WonderWomanSprite.WWSpriteState.JUMPING);
-            jumpTimer = 45;
+            jumpTimer = 60;
         }
     }
 

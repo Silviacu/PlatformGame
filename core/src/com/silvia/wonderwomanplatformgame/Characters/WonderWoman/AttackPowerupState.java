@@ -5,24 +5,27 @@ package com.silvia.wonderwomanplatformgame.Characters.WonderWoman;
  */
 
 public class AttackPowerupState implements CharacterState{
+    private String stateName = "Attack_Power";
+    private float jumpMult = 1;
+    private float damageMult = 2;
+
     @Override
     public void setState(WonderWomanCharacter player) {
-
+        player.powerupStatus = this;
     }
 
     @Override
     public String getStateName() {
-        return "Attack_Power";
+        return stateName;
     }
 
     @Override
     public float getJump(float jump) {
-        return 0;
+        return jump*jumpMult;
     }
-
 
     @Override
     public float getDamage(float damage) {
-        return 0;
+        return damage*damageMult;
     }
 }
