@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.silvia.wonderwomanplatformgame.GameTest;
+import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.World.MapOne;
 import com.silvia.wonderwomanplatformgame.World.MapResources;
 
@@ -18,9 +19,39 @@ import static org.junit.Assert.assertNotNull;
 
 
 public class ZoneEndTest extends GameTest {
+    PointsTracker pt = new PointsTracker();
+    boolean alreadyTouched = false;
+
+    public void testOnTouch() {
+        if (!alreadyTouched){
+            try {
+                pt.updateScoreboard();
+                pt.saveScore();
+            } catch (Exception io) {
+                System.out.println(io);
+            }
+            alreadyTouched = true;
+        }
+    }
+
     @Test
     public void onTouch() throws Exception {
+        pt.addToScoreboard("Silvia", 9001);
+        pt.saveScore();
+        assertEquals("Silvia: 9001", pt.scoreboard.get(0));
+        assertEquals("Silvia: 9001", pt.readScore().get(0));
 
+        pt.setScoreboardFromFile();
+        assertEquals(false, alreadyTouched);
+        assertEquals("Silvia: 9001", pt.getScoreboard().get(0));
+
+
+        testOnTouch();
+        pt.addToScoreboard("Silvia", 0);
+
+        assertEquals(true, alreadyTouched);
+        assertEquals("Silvia: 9001", pt.getScoreboard().get(0));
+        assertEquals("Silvia: 0", pt.getScoreboard().get(1));
     }
 
     @Test

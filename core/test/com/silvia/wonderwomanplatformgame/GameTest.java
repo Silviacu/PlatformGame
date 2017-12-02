@@ -11,8 +11,14 @@ import org.junit.BeforeClass;
 import org.mockito.Mockito;
 
 
-
+/**
+ * We have native dependencies of libgdx. In order to access
+ * some of the things from the framework are not accessable so
+ * This class provides a headless way to access them (no graphical interface)
+ *
+ */
 public class GameTest  {
+
     // This is our "test" application
     private static Application application;
 

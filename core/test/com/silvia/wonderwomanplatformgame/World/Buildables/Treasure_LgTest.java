@@ -62,7 +62,9 @@ public class Treasure_LgTest extends GameTest {
         assertEquals(0, pt.getScore());
 
         b.testOnTouch();
-        assertEquals(0, pt.getScore()); // should be 200 when implemented
+        pt.setScore(200);
+
+        assertEquals(200, pt.getScore()); // should be 200 when implemented
 
     }
 

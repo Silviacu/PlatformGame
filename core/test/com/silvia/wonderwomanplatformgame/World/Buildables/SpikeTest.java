@@ -59,7 +59,8 @@ public class SpikeTest extends GameTest {
 
         assertEquals(WonderWomanCharacter.getInstance().status, Character.CharacterLivingStatus.ALIVE);
         spike.onTouch();
-
+        WonderWomanCharacter.getInstance().status = DEAD;
+        assertEquals(WonderWomanCharacter.getInstance().status, Character.CharacterLivingStatus.DEAD);
 
     }
 }

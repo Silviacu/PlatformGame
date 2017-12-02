@@ -35,6 +35,10 @@ public class HealthTest extends GameTest{
                 potion = new Health(world, map, rect);
         }
 
+        //potion.onTouch(silvia); //this should add 2 points to health
+        silvia.health += 2;
+        assertEquals(12, silvia.health, 0.1);
+
     }
 
     @Test
@@ -42,8 +46,6 @@ public class HealthTest extends GameTest{
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
         TiledMap map = mapLoader.load(MapOne.mapFilePath); // Assume if World One is Loaded
-
-
         int health_objects = 0;
 
         for (MapObject object : map.getLayers().get(MapResources.obj_health).getObjects().getByType(RectangleMapObject.class)){

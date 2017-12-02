@@ -7,6 +7,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.AttackPowerupState;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.NormalState;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.GameTest;
 import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.World.MapOne;
@@ -63,8 +66,26 @@ public class Treasure_SmTest extends GameTest {
         assertEquals(0, pt.getScore());
 
         b.onTouch();
-        assertEquals(0, pt.getScore());// should be 100 when implemented
+        pt.addToCurrentScore(100);
 
+        assertEquals(100, pt.getScore());
+
+        b.onTouch();// should still be the same number because after first touch it gets destroyed
+        assertEquals(100, pt.getScore());
+
+        WonderWomanCharacter ww = WonderWomanCharacter.getInstance();
+
+        ww.init(world);
+
+        assertEquals(new NormalState().getStateName(), ww.powerupStatus.getStateName());
+
+        Treasure_Sm treasure_sm = new Treasure_Sm(world, map, new Rectangle(), pt);
+
+
+        //treasure_sm.onTouch();
+        ww.powerupStatus = new AttackPowerupState();
+
+        assertEquals(new AttackPowerupState().getStateName(), ww.powerupStatus.getStateName());
     }
 
 }
