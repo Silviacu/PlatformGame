@@ -21,6 +21,8 @@ public class Breakable extends InteractiveTileObject {
     private boolean exists;
     private PointsTracker pointsTracker;
 
+    public Breakable() {}
+
     public Breakable(PointsTracker pt) {
         this.exists = true;
         this.pointsTracker = pt;
@@ -78,7 +80,7 @@ public class Breakable extends InteractiveTileObject {
         return layer.getCell((int)(body.getPosition().x * WonderWomanGame.PPM/16), (int)((body.getPosition().y-.16) * WonderWomanGame.PPM/16));
     }
 
-    public static void build_breakables(World world, TiledMap map, PointsTracker pt) {
+    public void build_objects(World world, TiledMap map, PointsTracker pt) {
         for (MapObject object : map.getLayers().get(MapResources.obj_breakables).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Breakable(world, map, rect, pt);

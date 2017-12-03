@@ -13,6 +13,9 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 
 public class Powerup extends InteractiveTileObject {
 
+    public Powerup(){
+    }
+
     public Powerup(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);
@@ -27,7 +30,7 @@ public class Powerup extends InteractiveTileObject {
 //        ww.powerupStatus = new AttackPowerupState();
     }
 
-    public static void build_powerups(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_powerups).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Powerup(world, map, rect);

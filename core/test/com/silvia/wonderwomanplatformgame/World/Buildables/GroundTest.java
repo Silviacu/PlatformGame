@@ -29,7 +29,7 @@ public class GroundTest extends GameTest{
         World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
         TmxMapLoader mapLoader = new TmxMapLoader();
         TiledMap map = mapLoader.load(MapOne.mapFilePath); // Assume if World One is Loaded
-        Ground.build_ground(world, map);
+        new Ground().build_objects(world, map);
 
         int numberOfGroundObjects = 0;
 

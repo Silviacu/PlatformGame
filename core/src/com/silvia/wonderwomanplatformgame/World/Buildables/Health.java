@@ -35,7 +35,7 @@ public class Health extends InteractiveTileObject {
         }
     }
 
-    public static void build_health_packs(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_health).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Health(world, map, rect);

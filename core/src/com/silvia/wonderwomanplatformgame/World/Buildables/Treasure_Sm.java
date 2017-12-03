@@ -21,6 +21,7 @@ public class Treasure_Sm extends InteractiveTileObject{
     private PointsTracker pointsTracker;
     private int pointValue = 100;
 
+    public Treasure_Sm(){}
     public Treasure_Sm(PointsTracker pt) {
         this.exists = true;
         this.pointsTracker = pt;
@@ -64,7 +65,7 @@ public class Treasure_Sm extends InteractiveTileObject{
         return this.pointsTracker.getScore();
     }
 
-    public static void build_treasure_sm(World world, TiledMap map, PointsTracker pt){
+    public void build_objects(World world, TiledMap map, PointsTracker pt){
         for (MapObject object : map.getLayers().get(mapResources.obj_treasure_sm).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Treasure_Sm(world, map, rect, pt);

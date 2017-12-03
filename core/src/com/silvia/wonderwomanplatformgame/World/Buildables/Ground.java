@@ -10,7 +10,7 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 
 
 public class Ground extends BodyTileObject {
-    public static void build_ground(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for(MapObject object : map.getLayers().get(mapResources.obj_ground).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 

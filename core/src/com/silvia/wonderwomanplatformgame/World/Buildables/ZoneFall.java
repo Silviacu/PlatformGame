@@ -12,6 +12,7 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 import com.silvia.wonderwomanplatformgame.Characters.Character;
 
 public class ZoneFall extends InteractiveTileObject {
+    public ZoneFall(){}
     public ZoneFall(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);
@@ -26,7 +27,7 @@ public class ZoneFall extends InteractiveTileObject {
         ww.status = Character.CharacterLivingStatus.DEAD;
     }
 
-    public static void build_fall_zones(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_zone_fall).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new ZoneFall(world, map, rect);

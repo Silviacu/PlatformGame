@@ -57,7 +57,7 @@ public class GameScreen implements Screen{
     public HudState hudState;
 
 
-    private static Character player1,
+    public Character player1,
             zombie1,
             big2,
             crow1;
@@ -89,7 +89,7 @@ public class GameScreen implements Screen{
         big2 = new EnemyBig("Big 2", 1, world, 2300, 500);
 
 
-        world.setContactListener(new WorldObjectCollisionListener());
+        world.setContactListener(new WorldObjectCollisionListener(this));
     }
 
     private void setGameMap(String mapPath) {

@@ -1,5 +1,7 @@
 package com.silvia.wonderwomanplatformgame.World.Buildables;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -11,7 +13,9 @@ import com.badlogic.gdx.physics.box2d.Filter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 
+import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
+import com.silvia.wonderwomanplatformgame.World.MapResources;
 
 
 public abstract class InteractiveTileObject extends BodyTileObject {
@@ -21,8 +25,9 @@ public abstract class InteractiveTileObject extends BodyTileObject {
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
-    public InteractiveTileObject() {}
 
+    public InteractiveTileObject() {
+    }
     /*
     creates a fixture and a body and assignes a category to each fixture
    */
@@ -32,12 +37,13 @@ public abstract class InteractiveTileObject extends BodyTileObject {
         this.bounds = bounds;
 
         bodydefinition.type = BodyDef.BodyType.StaticBody;
-        bodydefinition.position.set((bounds.getX() + bounds.getWidth() /2)/ WonderWomanGame.PPM,(bounds.getY() +bounds.getHeight()/2)/WonderWomanGame.PPM );
+        bodydefinition.position.set((bounds.getX() + bounds.getWidth() / 2) / WonderWomanGame.PPM, (bounds.getY() + bounds.getHeight() / 2) / WonderWomanGame.PPM);
         body = world.createBody(bodydefinition);
-        shape.setAsBox(bounds.getWidth() /2 / WonderWomanGame.PPM, bounds.getHeight() /2 /WonderWomanGame.PPM );
+        shape.setAsBox(bounds.getWidth() / 2 / WonderWomanGame.PPM, bounds.getHeight() / 2 / WonderWomanGame.PPM);
         fdef.shape = shape;
 
         fdef.isSensor = true;
+
         fixture = body.createFixture(fdef);
     }
 
@@ -49,10 +55,11 @@ public abstract class InteractiveTileObject extends BodyTileObject {
         this.map = map;
 
         bodydefinition.type = BodyDef.BodyType.StaticBody;
-        bodydefinition.position.set((ellipse.x + ellipse.width/2)/ WonderWomanGame.PPM, (ellipse.y + ellipse.height/2)/WonderWomanGame.PPM);
+        bodydefinition.position.set((ellipse.x + ellipse.width / 2) / WonderWomanGame.PPM, (ellipse.y + ellipse.height / 2) / WonderWomanGame.PPM);
 
         body = world.createBody(bodydefinition);
-        shape.setAsBox(ellipse.width / 2 / WonderWomanGame.PPM, ellipse.height/2/WonderWomanGame.PPM);
+        shape.setAsBox(ellipse.width / 2 / WonderWomanGame.PPM, ellipse.height / 2 / WonderWomanGame.PPM);
+//        shape.setRadius(ellipse.width/2);
         fdef.shape = shape;
         fdef.isSensor = true;
         fixture = body.createFixture(fdef);
@@ -61,15 +68,29 @@ public abstract class InteractiveTileObject extends BodyTileObject {
 
     public abstract void onTouch();
 
-    public void setCategoryFilter(short filterBit){
+    public void setCategoryFilter(short filterBit) {
         Filter filter = new Filter();
         filter.categoryBits = filterBit;
         fixture.setFilterData(filter);
     }
 
-    public TiledMapTileLayer.Cell getCell(){
+    public TiledMapTileLayer.Cell getCell() {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(7);
-        return layer.getCell((int)(body.getPosition().x * WonderWomanGame.PPM/16), (int)(body.getPosition().y * WonderWomanGame.PPM/16));
+        return layer.getCell((int) (body.getPosition().x * WonderWomanGame.PPM / 16), (int) (body.getPosition().y * WonderWomanGame.PPM / 16));
     }
 
+    @Override
+    public void build_objects(World world, TiledMap map) {
+        for (MapObject object : map.getLayers().get(mapResources.obj_health).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Health(world, map, rect);
+        }
+    }
+
+    public void build_objects(World world, TiledMap map, PointsTracker pt) {
+        for (MapObject object : map.getLayers().get(MapResources.obj_breakables).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            new Breakable(world, map, rect, pt);
+        }
+    }
 }

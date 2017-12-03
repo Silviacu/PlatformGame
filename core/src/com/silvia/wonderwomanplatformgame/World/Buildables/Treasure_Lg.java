@@ -15,6 +15,7 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 
 public class Treasure_Lg extends InteractiveTileObject {
 
+    public Treasure_Lg(){}
     private boolean exists;
     private PointsTracker pointsTracker;
     private int pointValue = 200;
@@ -59,7 +60,7 @@ public class Treasure_Lg extends InteractiveTileObject {
     }
 
 
-    public static void build_treasure_lg(World world, TiledMap map, PointsTracker pt) {
+    public void build_objects(World world, TiledMap map, PointsTracker pt) {
         for (MapObject object : map.getLayers().get(mapResources.obj_treasure_lg).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new Treasure_Lg(world, map, rect, pt);

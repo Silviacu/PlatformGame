@@ -13,6 +13,7 @@ import com.silvia.wonderwomanplatformgame.Characters.Character;
 
 public class Spike extends InteractiveTileObject {
 
+    public Spike(){}
     public Spike(World world, TiledMap map, Ellipse bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);
@@ -28,7 +29,7 @@ public class Spike extends InteractiveTileObject {
     }
 
 
-    public static void build_spikes(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_spikes).getObjects().getByType(EllipseMapObject.class)){
             Ellipse ellipse = ((EllipseMapObject) object).getEllipse();
             new Spike(world, map, ellipse);

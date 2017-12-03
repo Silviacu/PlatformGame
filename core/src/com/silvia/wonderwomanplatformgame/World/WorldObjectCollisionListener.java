@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
+import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
 
 
 /**
@@ -11,6 +12,11 @@ import com.badlogic.gdx.physics.box2d.Manifold;
  */
 
 public class WorldObjectCollisionListener implements ContactListener {
+
+    GameScreen screen;
+
+    public WorldObjectCollisionListener(){}
+    public WorldObjectCollisionListener(GameScreen screen){}
 
     @Override
     public void beginContact(Contact contact) {// two collisions begin to collide

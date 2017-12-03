@@ -15,6 +15,8 @@ public class ZoneEnd extends InteractiveTileObject {
     private GameScreen game;
     private boolean alreadyTouched;
 
+    public ZoneEnd(){}
+
     public ZoneEnd(World world, TiledMap map, Rectangle bounds) {
         super(world, map, bounds);
         fixture.setUserData(this);
@@ -29,6 +31,7 @@ public class ZoneEnd extends InteractiveTileObject {
         setCategoryFilter(WonderWomanGame.ZONEEND_BIT);
         alreadyTouched = false;
     }
+
 
     @Override
     public void onTouch() {
@@ -45,14 +48,14 @@ public class ZoneEnd extends InteractiveTileObject {
         }
     }
 
-    public static void build_end_zones(World world, TiledMap map) {
+    public void build_objects(World world, TiledMap map) {
         for (MapObject object : map.getLayers().get(mapResources.obj_zone_end).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new ZoneEnd(world, map, rect);
         }
     }
 
-    public static void build_end_zones(World world, TiledMap map, GameScreen gameScreen) {
+    public void build_objects(World world, TiledMap map, GameScreen gameScreen) {
         for (MapObject object : map.getLayers().get(mapResources.obj_zone_end).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             new ZoneEnd(world, map, rect, gameScreen);
