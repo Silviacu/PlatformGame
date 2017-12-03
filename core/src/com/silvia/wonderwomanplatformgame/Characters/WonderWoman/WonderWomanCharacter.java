@@ -22,7 +22,7 @@ public class WonderWomanCharacter extends Character {
     public int jumpTimer =0;
 
     public String characterName = "Wonder Woman";
-    public WonderWomanSprite characterSprite;
+//    public WonderWomanSprite characterSprite;
     public CharacterState powerupStatus;
     private AttackCollection wwAttacks = new WonderWomanAttackCollection();
     private static WonderWomanCharacter instance = new WonderWomanCharacter();
@@ -94,35 +94,35 @@ public class WonderWomanCharacter extends Character {
     public void jump() {
         //force impluse which is an imditate change ins speed, x y of impluse (y for jump), worldcenter is where in the bosy we wentto apply center/force if its anotehr then it will have a torque
         //third parameter wakes the objects up
-        if (characterSprite.b2body.getLinearVelocity().y <= 0 && jumpTimer == 0) {
-            characterSprite.b2body.applyLinearImpulse(new Vector2(0, this.powerupStatus.getJump(jumpSpeed)), characterSprite.b2body.getWorldCenter(), true);
-            characterSprite.setSprite(WonderWomanSprite.WWSpriteState.JUMPING);
+        if (((WonderWomanSprite)characterSprite).b2body.getLinearVelocity().y <= 0 && jumpTimer == 0) {
+            ((WonderWomanSprite)characterSprite).b2body.applyLinearImpulse(new Vector2(0, this.powerupStatus.getJump(jumpSpeed)), ((WonderWomanSprite)characterSprite).b2body.getWorldCenter(), true);
+            ((WonderWomanSprite) characterSprite).setSprite(WonderWomanSprite.WWSpriteState.JUMPING);
             jumpTimer = 60;
         }
     }
 
     public void walkRight() {
-        characterSprite.b2body.applyLinearImpulse(new Vector2(walkSpeed, 0), characterSprite.b2body.getWorldCenter(), true);
+        ((WonderWomanSprite)characterSprite).b2body.applyLinearImpulse(new Vector2(walkSpeed, 0), ((WonderWomanSprite)characterSprite).b2body.getWorldCenter(), true);
 
     }
 
     public void walkLeft() {
-        characterSprite.b2body.applyLinearImpulse(new Vector2(-walkSpeed, 0), characterSprite.b2body.getWorldCenter(), true);
-        characterSprite.setSprite(WonderWomanSprite.WWSpriteState.RUNNING);
+        ((WonderWomanSprite)characterSprite).b2body.applyLinearImpulse(new Vector2(-walkSpeed, 0), ((WonderWomanSprite)characterSprite).b2body.getWorldCenter(), true);
+        ((WonderWomanSprite) characterSprite).setSprite(WonderWomanSprite.WWSpriteState.RUNNING);
     }
 
     public void punch() {
         WonderWomanCharacter.getInstance().punchTimer = 60;
-        characterSprite.setSprite(WonderWomanSprite.WWSpriteState.PUNCHING);
+        ((WonderWomanSprite) characterSprite).setSprite(WonderWomanSprite.WWSpriteState.PUNCHING);
     }
 
     public void kick() {
         WonderWomanCharacter.getInstance().kickTimer = 60;
-        characterSprite.setSprite(WonderWomanSprite.WWSpriteState.KICKING);
+        ((WonderWomanSprite) characterSprite).setSprite(WonderWomanSprite.WWSpriteState.KICKING);
     }
 
     public float getXPosition() {
-        return characterSprite.b2body.getPosition().x;
+        return ((WonderWomanSprite)characterSprite).b2body.getPosition().x;
 
     }
 

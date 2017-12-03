@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.GameTest;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
+import com.silvia.wonderwomanplatformgame.Sprites.EnemyCrowSprite;
 
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class EnemyCrowTest extends GameTest {
         assertEquals(true, crow.facingLeft);
         assertEquals(0, crow.invulnerabilityTimer);
         assertEquals(0, crow.getSwoopTimer());
-        assertNotNull(crow.crowSprite);
+        assertNotNull(crow.characterSprite);
     }
 
     @Test
@@ -71,18 +72,18 @@ public class EnemyCrowTest extends GameTest {
 
     @Test
     public void flyLeft() throws Exception {
-        assertEquals(new Vector2(4,4), crow.crowSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyCrowSprite) crow.characterSprite).b2body.getPosition());
         crow.flyLeft();
-        crow.crowSprite.update(100);
+        ((EnemyCrowSprite) crow.characterSprite).update(100);
         //TODO
-        // assertEquals(new Vector2(-0.06f,0), crow.crowSprite.b2body.getLinearVelocity());
+        // assertEquals(new Vector2(-0.06f,0), ((EnemyCrowSprite) crow.characterSprite).b2body.getLinearVelocity());
     }
 
     @Test
     public void flyRight() throws Exception {
-        assertEquals(new Vector2(4,4), crow.crowSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyCrowSprite) crow.characterSprite).b2body.getPosition());
         crow.flyRight();
-        crow.crowSprite.update(100);
+        ((EnemyCrowSprite) crow.characterSprite).update(100);
         //TODO
         //assertEquals(new Vector2(0.08f,0), crow.crowSprite.b2body.getLinearVelocity());
     }

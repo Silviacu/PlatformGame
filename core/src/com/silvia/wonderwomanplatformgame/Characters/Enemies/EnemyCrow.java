@@ -19,7 +19,7 @@ public class EnemyCrow extends EnemyCharacter {
     private int swoopTimer;
     public int invulnerabilityTimer;
 
-    public EnemyCrowSprite crowSprite;
+    //public EnemyCrowSprite crowSprite;
 
 
     public void setSwoopTimer(int newSwoopTimer) { this.swoopTimer = newSwoopTimer; }
@@ -39,7 +39,7 @@ public class EnemyCrow extends EnemyCharacter {
         this.invulnerabilityTimer = 0;
         this.attacks = new EnemyCrowAttackCollection();
 
-        crowSprite = new EnemyCrowSprite(world, this, xposition, yposition);
+        this.characterSprite = new EnemyCrowSprite(world, this, xposition, yposition);
     }
 
     public void dealContactDamage(Character targetCharacter) {
@@ -63,8 +63,8 @@ public class EnemyCrow extends EnemyCharacter {
 
     public void swoop() {
         swoopTimer = 120;
-        enemyContactDamage =((EnemyCrowAttackCollection) attacks). flyAttack.attackBaseDamage;
-        this.crowSprite.b2body.applyForce(0f, -50f, this.crowSprite.b2body.getWorldCenter().x, this.crowSprite.b2body.getWorldCenter().y, true);
+        enemyContactDamage = ((EnemyCrowAttackCollection) attacks).flyAttack.attackBaseDamage;
+        ((EnemyCrowSprite) this.characterSprite).b2body.applyForce(0f, -50f, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().y, true);
     }
 
     public void idle() {
@@ -72,19 +72,17 @@ public class EnemyCrow extends EnemyCharacter {
     }
 
     public void flyLeft() {
-        //System.out.println("Walk Left");
-        this.crowSprite.b2body.applyForce(-0.08f, 0, this.crowSprite.b2body.getWorldCenter().x, this.crowSprite.b2body.getWorldCenter().y, true);
+        ((EnemyCrowSprite) this.characterSprite).b2body.applyForce(-0.08f, 0, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = true;
     }
 
     public void flyRight() {
-        // System.out.println("Walk Right");
-        this.crowSprite.b2body.applyForce(0.08f, 0, this.crowSprite.b2body.getWorldCenter().x, this.crowSprite.b2body.getWorldCenter().y, true);
+        ((EnemyCrowSprite) this.characterSprite).b2body.applyForce(0.08f, 0, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = false;
     }
 
     public void update (float dt){
-        this.crowSprite.update(dt);
+        ((EnemyCrowSprite) this.characterSprite).update(dt);
 
         if(this.status == CharacterLivingStatus.ALIVE && swoopTimer <= 0)
             idle();
@@ -94,7 +92,9 @@ public class EnemyCrow extends EnemyCharacter {
         }
 
         if(swoopTimer > 60) {
-            this.crowSprite.b2body.applyForce(0f, -50f, this.crowSprite.b2body.getWorldCenter().x, this.crowSprite.b2body.getWorldCenter().y, true);
+            ((EnemyCrowSprite) this.characterSprite).b2body.applyForce(0f, -50f,
+                    ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().x,
+                    ((EnemyCrowSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         }
 
         if(PlayHUD.worldTimer % 2 == 0 && PlayHUD.worldTimer % 4 != 0 && swoopTimer == 0) {
@@ -114,5 +114,4 @@ public class EnemyCrow extends EnemyCharacter {
         }
 
     }
-
 }

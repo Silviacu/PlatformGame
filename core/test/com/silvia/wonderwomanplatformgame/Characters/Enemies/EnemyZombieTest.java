@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.GameTest;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
+import com.silvia.wonderwomanplatformgame.Sprites.EnemyZombieSprite;
 
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ public class EnemyZombieTest extends GameTest {
         assertEquals(true, zombie.facingLeft);
         assertEquals(0, zombie.invulnerabilityTimer);
         assertEquals(0, zombie.getBiteTimer());
-        assertNotNull(zombie.zombieSprite);
+        assertNotNull(zombie.characterSprite);
     }
 
     @Test
@@ -69,18 +70,18 @@ public class EnemyZombieTest extends GameTest {
 
     @Test
     public void walkLeft() throws Exception {
-        assertEquals(new Vector2(4,4), zombie.zombieSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyZombieSprite) zombie.characterSprite).b2body.getPosition());
         zombie.walkLeft();
-        zombie.zombieSprite.update(100);
-        assertEquals(new Vector2(-0.04f,0), zombie.zombieSprite.b2body.getLinearVelocity());
+        ((EnemyZombieSprite) zombie.characterSprite).update(100);
+        assertEquals(new Vector2(-0.04f,0), ((EnemyZombieSprite) zombie.characterSprite).b2body.getLinearVelocity());
     }
 
     @Test
     public void walkRight() throws Exception {
-        assertEquals(new Vector2(4,4), zombie.zombieSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyZombieSprite) zombie.characterSprite).b2body.getPosition());
         zombie.walkRight();
-        zombie.zombieSprite.update(100);
-        assertEquals(new Vector2(0.04f,0), zombie.zombieSprite.b2body.getLinearVelocity());
+        ((EnemyZombieSprite) zombie.characterSprite).update(100);
+        assertEquals(new Vector2(0.04f,0), ((EnemyZombieSprite) zombie.characterSprite).b2body.getLinearVelocity());
     }
 
     @Test

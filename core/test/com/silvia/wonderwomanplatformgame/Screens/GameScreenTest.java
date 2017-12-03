@@ -62,9 +62,9 @@ public class GameScreenTest extends GameTest {
 
         if (userInput == "left") {
             player.walkLeft();
-            player.characterSprite.update(100);
-            assertEquals(new Vector2(-0.1f,0), player.characterSprite.b2body.getLinearVelocity());
-            assertEquals(new Vector2(-player.getWalkSpeed(),0), player.characterSprite.b2body.getLinearVelocity());
+            ((WonderWomanSprite)player.characterSprite).update(100);
+            assertEquals(new Vector2(-0.1f,0), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
+            assertEquals(new Vector2(-player.getWalkSpeed(),0), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
         }
 
         userInput = "right";
@@ -72,9 +72,9 @@ public class GameScreenTest extends GameTest {
         if (userInput == "right") {
             player.walkRight(); // To cancel out the left
             player.walkRight();
-            player.characterSprite.update(100);
-            assertEquals(new Vector2(0.1f,0), player.characterSprite.b2body.getLinearVelocity());
-            assertEquals(new Vector2(player.getWalkSpeed(),0), player.characterSprite.b2body.getLinearVelocity());
+            ((WonderWomanSprite)player.characterSprite).update(100);
+            assertEquals(new Vector2(0.1f,0), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
+            assertEquals(new Vector2(player.getWalkSpeed(),0), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
         }
 
         userInput = "jump";
@@ -82,11 +82,11 @@ public class GameScreenTest extends GameTest {
         if (userInput == "jump") {
             player.walkLeft(); // to cancel out the right ;-;
             player.jumpTimer = 0;
-            player.characterSprite.b2body.setLinearVelocity(0,0);
+            ((WonderWomanSprite)player.characterSprite).b2body.setLinearVelocity(0,0);
             player.jump();
-            player.characterSprite.update(100);
-            assertEquals(new Vector2(0,4.2f), player.characterSprite.b2body.getLinearVelocity());
-            assertEquals(new Vector2(0,player.getJumpSpeed()), player.characterSprite.b2body.getLinearVelocity());
+            ((WonderWomanSprite)player.characterSprite).update(100);
+            assertEquals(new Vector2(0,4.2f), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
+            assertEquals(new Vector2(0,player.getJumpSpeed()), ((WonderWomanSprite)player.characterSprite).b2body.getLinearVelocity());
         }
     }
 

@@ -21,8 +21,7 @@ public class EnemyBig extends EnemyCharacter {
     public int invulnerabilityTimer;
     private int enlargeTimer;
 
-
-    public EnemyBigSprite bigSprite;
+    //public EnemyBigSprite bigSprite;
 
     public int getEnlargeTimer() { return enlargeTimer; }
     public void setEnlargeTimer(int newEnlargeTimer) { this.enlargeTimer = newEnlargeTimer; }
@@ -40,7 +39,7 @@ public class EnemyBig extends EnemyCharacter {
         this.enlargeTimer = 0;
         this.attacks = new EnemyBigAttackCollection();
 
-        bigSprite = new EnemyBigSprite(world, this, xposition, yposition);
+        characterSprite = new EnemyBigSprite(world, this, xposition, yposition);
     }
 
 
@@ -74,17 +73,17 @@ public class EnemyBig extends EnemyCharacter {
     }
 
     public void walkLeft() {
-        this.bigSprite.b2body.applyLinearImpulse(-0.06f, 0, this.bigSprite.b2body.getWorldCenter().x, this.bigSprite.b2body.getWorldCenter().y, true);
+        ((EnemyBigSprite) this.characterSprite).b2body.applyLinearImpulse(-0.06f, 0, ((EnemyBigSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyBigSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = true;
     }
 
     public void walkRight() {
-        this.bigSprite.b2body.applyLinearImpulse(0.06f, 0, this.bigSprite.b2body.getWorldCenter().x, this.bigSprite.b2body.getWorldCenter().y, true);
+        ((EnemyBigSprite) this.characterSprite).b2body.applyLinearImpulse(0.06f, 0, ((EnemyBigSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyBigSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = false;
     }
 
     public void update(float dt) {
-        this.bigSprite.update(dt);
+        ((EnemyBigSprite) this.characterSprite).update(dt);
 
         if(this.status == CharacterLivingStatus.ALIVE)
             idle();

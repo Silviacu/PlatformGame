@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  * Created by silvia on 11/15/2017.
  */
 public class WonderWomanSpriteTest extends GameTest {
-    World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
+    World world = new World(new Vector2(0, -10), true);// gravity, none for now, sleep objects at rest
     WonderWomanSprite ww = new WonderWomanSprite(world, "ww.png");
 
     @Before
@@ -27,7 +27,7 @@ public class WonderWomanSpriteTest extends GameTest {
 
     @Test
     public void setupIdleFramesTest() {
-        for(int i =0; i <3; i++) {
+        for (int i = 0; i < 3; i++) {
             TextureRegion idleFrame = new TextureRegion(ww.getTexture(), 180 + (i * 60), 0, 60, 54);
             assertEquals(idleFrame.getV(), ww.getFrame(i).getV(), 0.1);
             assertEquals(idleFrame.getU2(), ww.getFrame(i).getU2(), 0.1);
@@ -39,18 +39,18 @@ public class WonderWomanSpriteTest extends GameTest {
     public void setupRunningFramesTest() {
         ww.currentState = WonderWomanSprite.WWSpriteState.RUNNING;
         ww.previousState = WonderWomanSprite.WWSpriteState.RUNNING;
-        for(int i =0; i <3; i++){
-            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i*60), 520, 60, 54));
+        for (int i = 0; i < 3; i++) {
+            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i * 60), 520, 60, 54));
             assertEquals(runFrame.getU(), ww.getFrame(i).getU(), .2);
             assertEquals(runFrame.getU2(), ww.getFrame(i).getU2(), .2);
         }
-        for(int i =0; i<3; i++){
-            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i*60), 580, 60, 54));
+        for (int i = 0; i < 3; i++) {
+            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i * 60), 580, 60, 54));
             assertEquals(runFrame.getU(), ww.getFrame(i).getU(), .2);
             assertEquals(runFrame.getU2(), ww.getFrame(i).getU2(), .2);
         }
-        for(int i =0; i <2; i++){
-            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i*60), 640, 60, 54));
+        for (int i = 0; i < 2; i++) {
+            TextureRegion runFrame = (new TextureRegion(ww.getTexture(), 180 + (i * 60), 640, 60, 54));
             assertEquals(runFrame.getU(), ww.getFrame(i).getU(), .2);
             assertEquals(runFrame.getU2(), ww.getFrame(i).getU2(), .2);
         }
@@ -61,10 +61,10 @@ public class WonderWomanSpriteTest extends GameTest {
         ww.currentState = WonderWomanSprite.WWSpriteState.JUMPING;
         ww.previousState = WonderWomanSprite.WWSpriteState.JUMPING;
 
-        World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
+        World world = new World(new Vector2(0, -10), true);// gravity, none for now, sleep objects at rest
         WonderWomanSprite ww = new WonderWomanSprite(world, "ww.png");
 
-        for(int i =0; i <3; i++) {
+        for (int i = 0; i < 3; i++) {
             TextureRegion jumpFrame = new TextureRegion(ww.getTexture(), 180 + (i * 60), 0, 60, 54);
             assertEquals(jumpFrame.getV(), ww.getFrame(i).getV(), 0.1);
             assertEquals(jumpFrame.getU2(), ww.getFrame(i).getU2(), 0.1);
@@ -77,10 +77,10 @@ public class WonderWomanSpriteTest extends GameTest {
         ww.currentState = WonderWomanSprite.WWSpriteState.PUNCHING;
         ww.previousState = WonderWomanSprite.WWSpriteState.PUNCHING;
 
-        World world = new World(new Vector2(0,-10 ), true);// gravity, none for now, sleep objects at rest
+        World world = new World(new Vector2(0, -10), true);// gravity, none for now, sleep objects at rest
         WonderWomanSprite ww = new WonderWomanSprite(world, "ww.png");
 
-        for(int i =0; i <3; i++) {
+        for (int i = 0; i < 3; i++) {
             TextureRegion punchFrame = new TextureRegion(ww.getTexture(), 180 + (i * 60), 0, 60, 54);
             assertEquals(punchFrame.getV(), ww.getFrame(i).getV(), 0.1);
             assertEquals(punchFrame.getU2(), ww.getFrame(i).getU2(), 0.1);
@@ -90,12 +90,12 @@ public class WonderWomanSpriteTest extends GameTest {
 
     @Test
     public void defineCharacterTest() {
-        assertNotNull(WonderWomanCharacter.getInstance().characterSprite.b2body);
+        assertNotNull(((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).b2body);
     }
 
 
     @Test
-    public void updateTest(){
+    public void updateTest() {
         ww.update(1);
         assertEquals(0f, ww.b2body.getLinearVelocity().x, 0.01);
         assertEquals(0.32f, ww.b2body.getPosition().x, 0.01);
@@ -113,27 +113,27 @@ public class WonderWomanSpriteTest extends GameTest {
     }
 
     @Test
-    public void getFrameTest(){
+    public void getFrameTest() {
 
         // Kick
         WonderWomanCharacter.getInstance().kickTimer = 10;
-        assertEquals(ww.getWwKick().getKeyFrame(0),ww.getFrame(1));
+        assertEquals(ww.getWwKick().getKeyFrame(0), ww.getFrame(1));
 
         // Punch
         WonderWomanCharacter.getInstance().punchTimer = 10;
-        assertEquals(ww.getWwPunch().getKeyFrame(0),ww.getFrame(1));
+        assertEquals(ww.getWwPunch().getKeyFrame(0), ww.getFrame(1));
 
 
         // Idle
         WonderWomanCharacter.getInstance().kickTimer = 0;
         WonderWomanCharacter.getInstance().punchTimer = 0;
-        assertEquals(ww.getWwIdle().getKeyFrame(0),ww.getFrame(1));
+        assertEquals(ww.getWwIdle().getKeyFrame(0), ww.getFrame(1));
 
 
         // Walk
         ww.b2body.applyLinearImpulse(-0.06f, 0, ww.b2body.getWorldCenter().x, ww.b2body.getWorldCenter().y, true);
         ww.update(1);
-        assertEquals(ww.getWwRun().getKeyFrame(0),ww.getFrame(1));
+        assertEquals(ww.getWwRun().getKeyFrame(0), ww.getFrame(1));
 
 
         // Jump
@@ -149,5 +149,20 @@ public class WonderWomanSpriteTest extends GameTest {
         );
 
         ww.update(1);
-        assertEquals(ww.getWwJump().getKeyFrame(0),ww.getFrame(1));
-    }}
+        assertEquals(ww.getWwJump().getKeyFrame(0), ww.getFrame(1));
+    }
+
+    @Test
+    public void getStateTest() {
+        WonderWomanCharacter.getInstance().health = 10;
+        WonderWomanCharacter.getInstance().punchTimer = 10;
+        assertEquals(WonderWomanSprite.WWSpriteState.PUNCHING, ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).getState());
+
+        WonderWomanCharacter.getInstance().punchTimer = 0;
+        assertEquals(WonderWomanSprite.WWSpriteState.IDLE, ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).getState());
+
+        ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).b2body.applyLinearImpulse(-0.06f, 0, ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).b2body.getWorldCenter().x, ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).b2body.getWorldCenter().y, true);
+        ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).update(1);
+        assertEquals(WonderWomanSprite.WWSpriteState.RUNNING, ((WonderWomanSprite) WonderWomanCharacter.getInstance().characterSprite).getState());
+    }
+}

@@ -19,6 +19,7 @@ import com.silvia.wonderwomanplatformgame.Characters.Enemies.EnemyZombie;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.HUDs.DeadHUD;
 import com.silvia.wonderwomanplatformgame.HUDs.PauseHUD;
+import com.silvia.wonderwomanplatformgame.Sprites.WonderWomanSprite;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 import com.silvia.wonderwomanplatformgame.PointsTracker.PointsTracker;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
@@ -55,11 +56,11 @@ public class GameScreen implements Screen{
 
     public HudState hudState;
 
-    private static WonderWomanCharacter player1;
-    private static EnemyZombie zombie1;
-    // private static EnemyBig big1;
-    private static EnemyBig big2;
-    private static EnemyCrow crow1;
+
+    private static Character player1,
+            zombie1,
+            big2,
+            crow1;
 
 
     //making a constructor because sending game to screen
@@ -81,11 +82,11 @@ public class GameScreen implements Screen{
         setGameWorld();
 
         player1 = WonderWomanCharacter.getInstance();
-        player1.init(world);
+        ((WonderWomanCharacter)player1).init(world);
 
         zombie1 = new EnemyZombie("Zombie 1", 1, world, 500, 500);
         crow1 = new EnemyCrow("Crow 1", 1, world, 1500, 300);
-        big2 = new EnemyBig("Big 2", 1, world, 2500, 500);
+        big2 = new EnemyBig("Big 2", 1, world, 2300, 500);
 
 
         world.setContactListener(new WorldObjectCollisionListener());
@@ -115,7 +116,7 @@ public class GameScreen implements Screen{
     public void handleInput(float dt){
         if(Gdx.input.isKeyJustPressed(Input.Keys.K)) {
             System.out.println("Dealing 10k Damage to Player 1!");
-            player1.receiveDamage(10000);
+            ((WonderWomanCharacter)player1).receiveDamage(10000);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
             this.dispose();
@@ -155,20 +156,20 @@ public class GameScreen implements Screen{
         // Character Movement keys for if the game is playing
         if (hudState == HudState.PLAY) {
             if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player1.jump();
+                ((WonderWomanCharacter)player1).jump();
             }
             //want to know if they are holding it down thats why its not just,  and want to check that the person is not going a faster speed
-            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1.characterSprite.b2body.getLinearVelocity().x <= 2) {
-                player1.walkRight();
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && ((WonderWomanSprite)((WonderWomanCharacter)player1).characterSprite).b2body.getLinearVelocity().x <= 2) {
+                ((WonderWomanCharacter)player1).walkRight();
             }
-            if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1.characterSprite.b2body.getLinearVelocity().x >= -2) {
-                player1.walkLeft();
+            if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && ((WonderWomanSprite)((WonderWomanCharacter)player1).characterSprite).b2body.getLinearVelocity().x >= -2) {
+                ((WonderWomanCharacter)player1).walkLeft();
             }
             if(Gdx.input.isKeyPressed(Input.Keys.J)) {
-                player1.punch();
+                ((WonderWomanCharacter)player1).punch();
             }
             if(Gdx.input.isKeyPressed(Input.Keys.H )) {
-                player1.kick();
+                ((WonderWomanCharacter)player1).kick();
             }
         }
     }
@@ -209,11 +210,11 @@ public class GameScreen implements Screen{
 
         if (this.hudState == HudState.PLAY) {
             world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
-            player1.characterSprite.update(dt);
-            zombie1.update(dt);
+            ((WonderWomanSprite)((WonderWomanCharacter)player1).characterSprite).update(dt);
+            ((EnemyZombie)zombie1).update(dt);
             // big1.update(dt);
-            big2.update(dt);
-            crow1.update(dt);
+            ((EnemyBig)big2).update(dt);
+            ((EnemyCrow)crow1).update(dt);
             hud.update(dt, pointsTracker.getScore());
         }
 
@@ -222,15 +223,15 @@ public class GameScreen implements Screen{
         deadHud.update(dt);
         pauseHUD.update(dt);
 
-        if (player1.status == Character.CharacterLivingStatus.DEAD) {
+        if (((WonderWomanCharacter)player1).status == Character.CharacterLivingStatus.DEAD) {
             this.hud.pausePressed();
             this.hudState = HudState.DEAD;
             this.deadHud.showDeadHud();
         }
 
         // everytime our character moves we want to track him with our gamecam
-        // gamecamera.position.x = player1.characterSprite.b2body.getPosition().x;
-        gamecamera.position.x = player1.getXPosition();
+        // gamecamera.position.x = ((WonderWomanCharacter.player1characterSprite.b2body.getPosition().x;
+        gamecamera.position.x = ((WonderWomanCharacter)player1).getXPosition();
         gamecamera.update();
         renderer.setView(gamecamera); //render what our game cam can see
     }
@@ -251,11 +252,11 @@ public class GameScreen implements Screen{
 
         game.batch.setProjectionMatrix(gamecamera.combined);
         game.batch.begin();
-        player1.characterSprite.draw(game.batch);
-        zombie1.zombieSprite.draw(game.batch);
-        crow1.crowSprite.draw(game.batch);
+        ((WonderWomanSprite)((WonderWomanCharacter)player1).characterSprite).draw(game.batch);
+        ((EnemyZombie)zombie1).characterSprite.draw(game.batch);
+        ((EnemyCrow)crow1).characterSprite.draw(game.batch);
         //big1.bigSprite.draw(game.batch);
-        big2.bigSprite.draw(game.batch);
+        ((EnemyBig)big2).characterSprite.draw(game.batch);
         game.batch.end();
 
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);

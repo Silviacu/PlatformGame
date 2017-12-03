@@ -22,7 +22,7 @@ public class EnemyZombie extends EnemyCharacter {
     public int biteTimer;
 
 
-    public EnemyZombieSprite zombieSprite;
+    //public EnemyZombieSprite zombieSprite;
 
     public float getWalkSpeed(){ return walkspeed;}
     public int getBiteTimer() { return biteTimer; }
@@ -41,7 +41,7 @@ public class EnemyZombie extends EnemyCharacter {
         this.invulnerabilityTimer = 0;
         this.attacks = new EnemyZombieAttackCollection();
 
-        zombieSprite = new EnemyZombieSprite(world, this, xposition, yposition);
+        characterSprite = new EnemyZombieSprite(world, this, xposition, yposition);
     }
 
     public void dealContactDamage(Character targetCharacter) {
@@ -74,18 +74,17 @@ public class EnemyZombie extends EnemyCharacter {
     }
 
     public void walkLeft() {
-        this.zombieSprite.b2body.applyLinearImpulse(-0.04f, 0, this.zombieSprite.b2body.getWorldCenter().x, this.zombieSprite.b2body.getWorldCenter().y, true);
+        ((EnemyZombieSprite) this.characterSprite).b2body.applyLinearImpulse(-0.04f, 0, ((EnemyZombieSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyZombieSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = true;
     }
 
     public void walkRight() {
-        this.zombieSprite.b2body.applyLinearImpulse(0.04f, 0, this.zombieSprite.b2body.getWorldCenter().x, this.zombieSprite.b2body.getWorldCenter().y, true);
+        ((EnemyZombieSprite) this.characterSprite).b2body.applyLinearImpulse(0.04f, 0, ((EnemyZombieSprite) this.characterSprite).b2body.getWorldCenter().x, ((EnemyZombieSprite) this.characterSprite).b2body.getWorldCenter().y, true);
         this.facingLeft = false;
     }
 
     public void update (float dt){
-
-        this.zombieSprite.update(dt);
+        ((EnemyZombieSprite) this.characterSprite).update(dt);
 
         if(this.status == CharacterLivingStatus.ALIVE)
             idle();
@@ -109,8 +108,6 @@ public class EnemyZombie extends EnemyCharacter {
         if(invulnerabilityTimer > 0){
             invulnerabilityTimer--;
         }
-
     }
-
 
 }

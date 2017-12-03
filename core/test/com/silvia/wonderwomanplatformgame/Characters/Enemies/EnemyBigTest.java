@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.GameTest;
 import com.silvia.wonderwomanplatformgame.HUDs.PlayHUD;
+import com.silvia.wonderwomanplatformgame.Sprites.EnemyBigSprite;
 
 import org.junit.Test;
 
@@ -24,7 +25,7 @@ public class EnemyBigTest extends GameTest {
         assertEquals(true, big.facingLeft);
         assertEquals(0, big.invulnerabilityTimer);
         assertEquals(0, big.getEnlargeTimer());
-        assertNotNull(big.bigSprite);
+        assertNotNull((EnemyBigSprite) big.characterSprite);
     }
 
     @Test
@@ -68,18 +69,18 @@ public class EnemyBigTest extends GameTest {
 
     @Test
     public void walkLeft() throws Exception {
-        assertEquals(new Vector2(4,4), big.bigSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyBigSprite) big.characterSprite).b2body.getPosition());
         big.walkLeft();
-        big.bigSprite.update(100);
-        assertEquals(new Vector2(-0.06f,0), big.bigSprite.b2body.getLinearVelocity());
+        ((EnemyBigSprite) big.characterSprite).update(100);
+        assertEquals(new Vector2(-0.06f,0), ((EnemyBigSprite) big.characterSprite).b2body.getLinearVelocity());
     }
 
     @Test
     public void walkRight() throws Exception {
-        assertEquals(new Vector2(4,4), big.bigSprite.b2body.getPosition());
+        assertEquals(new Vector2(4,4), ((EnemyBigSprite) big.characterSprite).b2body.getPosition());
         big.walkRight();
-        big.bigSprite.update(100);
-        assertEquals(new Vector2(0.06f,0), big.bigSprite.b2body.getLinearVelocity());
+        ((EnemyBigSprite) big.characterSprite).update(100);
+        assertEquals(new Vector2(0.06f,0), ((EnemyBigSprite) big.characterSprite).b2body.getLinearVelocity());
     }
 
     @Test
