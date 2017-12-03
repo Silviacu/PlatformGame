@@ -52,8 +52,7 @@ public class PowerupTest extends GameTest {
         ww.init(world);
         assertEquals(new NormalState().getStateName(), ww.powerupStatus.getStateName());
 
-        //powerup.onTouch(); when implemented should bein jump state
-        ww.powerupStatus = new JumpPowerupState();
+        powerup.onTouch();
 
         assertEquals(new JumpPowerupState().getStateName(), ww.powerupStatus.getStateName());
     }

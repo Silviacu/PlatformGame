@@ -61,6 +61,12 @@ public class BreakableTest extends GameTest {
 
         assertEquals(0, pt.getScore());
 
+        b.testOnTouch();
+        assertEquals(200, pt.getScore());
+
+        b.testOnTouch();
+        assertEquals(200, pt.getScore());
+
     }
 
 

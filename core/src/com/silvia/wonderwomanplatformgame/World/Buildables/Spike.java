@@ -6,7 +6,10 @@ import com.badlogic.gdx.maps.objects.EllipseMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Ellipse;
 import com.badlogic.gdx.physics.box2d.World;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.NormalState;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
+import com.silvia.wonderwomanplatformgame.Characters.Character;
 
 public class Spike extends InteractiveTileObject {
 
@@ -18,7 +21,10 @@ public class Spike extends InteractiveTileObject {
 
     @Override
     public void onTouch() {
-
+        Gdx.app.log("Spikes", "Collision");
+        WonderWomanCharacter ww = WonderWomanCharacter.getInstance();
+        ww.powerupStatus = new NormalState();
+        ww.status = Character.CharacterLivingStatus.DEAD;
     }
 
 

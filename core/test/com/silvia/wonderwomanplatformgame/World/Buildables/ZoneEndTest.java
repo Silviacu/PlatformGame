@@ -45,9 +45,7 @@ public class ZoneEndTest extends GameTest {
         assertEquals(false, alreadyTouched);
         assertEquals("Silvia: 9001", pt.getScoreboard().get(0));
 
-
         testOnTouch();
-        pt.addToScoreboard("Silvia", 0);
 
         assertEquals(true, alreadyTouched);
         assertEquals("Silvia: 9001", pt.getScoreboard().get(0));

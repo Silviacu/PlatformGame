@@ -66,8 +66,6 @@ public class Treasure_SmTest extends GameTest {
         assertEquals(0, pt.getScore());
 
         b.onTouch();
-        pt.addToCurrentScore(100);
-
         assertEquals(100, pt.getScore());
 
         b.onTouch();// should still be the same number because after first touch it gets destroyed
@@ -80,10 +78,7 @@ public class Treasure_SmTest extends GameTest {
         assertEquals(new NormalState().getStateName(), ww.powerupStatus.getStateName());
 
         Treasure_Sm treasure_sm = new Treasure_Sm(world, map, new Rectangle(), pt);
-
-
-        //treasure_sm.onTouch();
-        ww.powerupStatus = new AttackPowerupState();
+        treasure_sm.onTouch();
 
         assertEquals(new AttackPowerupState().getStateName(), ww.powerupStatus.getStateName());
     }

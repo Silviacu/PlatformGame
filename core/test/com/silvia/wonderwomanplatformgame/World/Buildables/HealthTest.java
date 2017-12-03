@@ -35,8 +35,7 @@ public class HealthTest extends GameTest{
                 potion = new Health(world, map, rect);
         }
 
-        //potion.onTouch(silvia); //this should add 2 points to health
-        silvia.health += 2;
+        potion.onTouch(silvia);
         assertEquals(12, silvia.health, 0.1);
 
     }

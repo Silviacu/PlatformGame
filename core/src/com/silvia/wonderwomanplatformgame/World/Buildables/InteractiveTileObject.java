@@ -21,7 +21,6 @@ public abstract class InteractiveTileObject extends BodyTileObject {
     protected TiledMapTile tile;
     protected Rectangle bounds;
     protected Body body;
-
     public InteractiveTileObject() {}
 
     /*
@@ -39,7 +38,6 @@ public abstract class InteractiveTileObject extends BodyTileObject {
         fdef.shape = shape;
 
         fdef.isSensor = true;
-
         fixture = body.createFixture(fdef);
     }
 
@@ -60,6 +58,7 @@ public abstract class InteractiveTileObject extends BodyTileObject {
         fixture = body.createFixture(fdef);
     }
 
+
     public abstract void onTouch();
 
     public void setCategoryFilter(short filterBit){
@@ -72,6 +71,5 @@ public abstract class InteractiveTileObject extends BodyTileObject {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(7);
         return layer.getCell((int)(body.getPosition().x * WonderWomanGame.PPM/16), (int)(body.getPosition().y * WonderWomanGame.PPM/16));
     }
-
 
 }

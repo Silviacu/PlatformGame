@@ -61,9 +61,7 @@ public class ZoneFallTest extends GameTest {
 
         assertEquals(WonderWomanCharacter.getInstance().status, ALIVE);
         zonefall.onTouch();
-        WonderWomanCharacter.getInstance().status = DEAD;
         assertEquals(WonderWomanCharacter.getInstance().status, Character.CharacterLivingStatus.DEAD);
-
 
     }
 
