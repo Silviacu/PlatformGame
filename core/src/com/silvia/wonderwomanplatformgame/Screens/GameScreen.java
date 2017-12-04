@@ -77,7 +77,7 @@ public class GameScreen implements Screen{
         deadHud = new DeadHUD(game.batch, this);
         pauseHUD = new PauseHUD(game.batch, this);
 
-        setGameMap(MapOne.mapFilePath);
+        setGameMap(new MapOne().mapFilePath);
         setGameCamera();
         setGameWorld();
 

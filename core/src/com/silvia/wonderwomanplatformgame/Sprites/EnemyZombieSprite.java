@@ -197,6 +197,7 @@ public class EnemyZombieSprite extends CharacterSprite {
         shape.setAsBox(5/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
         fdef.shape = shape;
         b2body.createFixture(fdef);
+        b2body.setUserData(this);
 
         PolygonShape x_sensor = new PolygonShape();
         x_sensor.setAsBox(6/WonderWomanGame.PPM, 26/WonderWomanGame.PPM);

@@ -206,6 +206,7 @@ public class EnemyBigSprite extends CharacterSprite {
         shape2.setAsBox(35/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
         fdef.shape = shape2;
         b2body.createFixture(fdef);
+        b2body.setUserData(this);
 
         PolygonShape x_sensor = new PolygonShape();
         x_sensor.setAsBox(35/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);

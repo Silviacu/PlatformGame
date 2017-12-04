@@ -253,6 +253,7 @@ public class WonderWomanSprite extends CharacterSprite {
         fdef.shape = shape;
         b2body.createFixture(fdef);
 
+
         PolygonShape x_sensor = new PolygonShape();
         x_sensor.setAsBox(6/WonderWomanGame.PPM, 26/WonderWomanGame.PPM);
         fdef.shape = x_sensor;
