@@ -66,5 +66,13 @@ Open up your favorite terminal (I recommend Git Bash on Windows) and type in the
     1. Switch to Desktop Configration
     2. Click the play button
     3. Wait for the game to load
-    4. Move with the arrow keys
+    4. Go through screens by pressing (n)
+    5. Move with the arrow keys (left, right)
+       Jump: (up)
+       Punch: (j)
+       Kick: (h)
+       Pause: (p)
+       Resume: (r)
+       Exit: (esc)
+       
 
