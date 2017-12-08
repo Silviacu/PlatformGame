@@ -17,6 +17,8 @@ import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanChar
 import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
 import com.silvia.wonderwomanplatformgame.WonderWomanGame;
 
+import static com.silvia.wonderwomanplatformgame.Characters.Character.CharacterLivingStatus.DEAD;
+
 /**
  * Created by silvia on 11/15/2017.
  */
@@ -37,6 +39,9 @@ public class PlayHUD implements Disposable {
     public Label worldLabel;
     public Label characterLabel;
 
+    public int getTime(){
+        return worldTimer;
+    }
     public PlayHUD(){
         this.setupPlayHUD();
     }
@@ -70,9 +75,9 @@ public class PlayHUD implements Disposable {
         timeCount =0;
 
         Table table = new Table();
-        table.top(); // put it at the top of stage
-        table.setFillParent(true);// table is the size of our stage
-        //03 how many numbers d is for interger graphic version font
+        table.top();
+        table.setFillParent(true);
+
         characterLabel =new Label("Wonder-Woman", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthLabel = new Label(String.format("10"), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         scoreLabel = new Label(String.format("0"), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
@@ -120,6 +125,9 @@ public class PlayHUD implements Disposable {
             timeCount = 0;
             scoreLabel.setText("" + score);
             healthLabel.setText(WonderWomanCharacter.getInstance().health + "");
+        }
+        if(worldTimer <=0){
+           WonderWomanCharacter.getInstance().setStatus(DEAD);
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if(gameScreen.hudState == GameScreen.HudState.PAUSE) {
