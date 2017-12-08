@@ -1,9 +1,13 @@
 package com.silvia.wonderwomanplatformgame.HUDs;
 
+import com.silvia.wonderwomanplatformgame.Characters.Character;
+import com.silvia.wonderwomanplatformgame.Characters.WonderWoman.WonderWomanCharacter;
 import com.silvia.wonderwomanplatformgame.GameTest;
 
 import org.junit.Test;
 
+import static com.silvia.wonderwomanplatformgame.Characters.Character.CharacterLivingStatus.ALIVE;
+import static com.silvia.wonderwomanplatformgame.Characters.Character.CharacterLivingStatus.DEAD;
 import static org.junit.Assert.*;
 
 /**
@@ -35,4 +39,22 @@ public class PlayHUDTest extends GameTest {
         playHUD.update(1, 40);
         assertEquals(true, playHUD.countdownLabel.textEquals("299"));
     }
+
+    @Test
+    public void testTimeOver() {
+
+        WonderWomanCharacter.getInstance().setStatus(ALIVE);
+        assertEquals(WonderWomanCharacter.getInstance().getStatus(), Character.CharacterLivingStatus.ALIVE);
+
+        for(int i=0; i<300; i++){
+            playHUD.update(1, 40);
+        }
+
+        assertEquals(playHUD.getTime(),0);// should kill Wonder Woman when implemented
+        WonderWomanCharacter.getInstance().setStatus(DEAD);
+        assertEquals(WonderWomanCharacter.getInstance().getStatus(), Character.CharacterLivingStatus.DEAD);
+    }
+
+
+
 }
