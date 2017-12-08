@@ -51,7 +51,6 @@ public class PlayHUDTest extends GameTest {
         }
 
         assertEquals(playHUD.getTime(),0);// should kill Wonder Woman when implemented
-        WonderWomanCharacter.getInstance().setStatus(DEAD);
         assertEquals(WonderWomanCharacter.getInstance().getStatus(), Character.CharacterLivingStatus.DEAD);
     }
 

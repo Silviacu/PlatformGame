@@ -44,6 +44,7 @@ public class EnemyZombie extends EnemyCharacter {
         characterSprite = new EnemyZombieSprite(world, this, xposition, yposition);
     }
 
+    @Override
     public void dealContactDamage(Character targetCharacter) {
         this.dealDamage(this.enemyContactDamage, targetCharacter);
     }

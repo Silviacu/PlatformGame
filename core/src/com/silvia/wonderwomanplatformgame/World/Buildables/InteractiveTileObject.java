@@ -29,7 +29,7 @@ public abstract class InteractiveTileObject extends BodyTileObject {
     public InteractiveTileObject() {
     }
     /*
-    creates a fixture and a body and assignes a category to each fixture
+    creates a fixture and a body and assigness a category to each fixture
    */
     public InteractiveTileObject(World world, TiledMap map, Rectangle bounds) {
         this.world = world;
@@ -81,16 +81,10 @@ public abstract class InteractiveTileObject extends BodyTileObject {
 
     @Override
     public void build_objects(World world, TiledMap map) {
-        for (MapObject object : map.getLayers().get(mapResources.obj_health).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Health(world, map, rect);
-        }
+
     }
 
     public void build_objects(World world, TiledMap map, PointsTracker pt) {
-        for (MapObject object : map.getLayers().get(MapResources.obj_breakables).getObjects().getByType(RectangleMapObject.class)) {
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            new Breakable(world, map, rect, pt);
-        }
+
     }
 }

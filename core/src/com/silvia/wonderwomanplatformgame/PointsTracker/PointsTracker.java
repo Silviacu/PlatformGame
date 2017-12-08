@@ -12,24 +12,6 @@ import java.util.List;
 public class PointsTracker {
     public static int currentScore;
     public static List<String> scoreboard;
-
-    public PointsTracker() {
-        this(0);
-    }
-
-    public PointsTracker(int currentScore) {
-//        System.out.println("Initialized Points Tracker with initial currentScore of: " + currentScore);
-        this.currentScore = currentScore;
-        this.scoreboard = new ArrayList<String>();
-    }
-
-    public int addToCurrentScore(int pointsToAdd) {
-        // TODO Add logic later to catch negative values or other invalid values.
-
-        this.currentScore += pointsToAdd;
-        return this.currentScore;
-    }
-
     public int getScore() {
         return this.currentScore;
     }
@@ -37,9 +19,22 @@ public class PointsTracker {
         return this.scoreboard;
     }
 
-    public int setScore(int newScore) {
-        // TODO Again, catch negative / invalid point values here.
+    public PointsTracker() {
+        this(0);
+    }
 
+    public PointsTracker(int currentScore) {
+
+        this.currentScore = currentScore;
+        this.scoreboard = new ArrayList<String>();
+    }
+
+    public int addToCurrentScore(int pointsToAdd) {
+        this.currentScore += pointsToAdd;
+        return this.currentScore;
+    }
+
+    public int setScore(int newScore) {
         this.currentScore = newScore;
         return this.currentScore;
     }

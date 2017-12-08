@@ -50,7 +50,7 @@ public class DeadHUD implements Disposable {
 
         Table table = new Table();
         table.top(); // put it at the top of stage
-        table.setFillParent(true);// table is the size of our stage
+        table.setFillParent(true);
 
         deadLabel = new Label("DEAD", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 

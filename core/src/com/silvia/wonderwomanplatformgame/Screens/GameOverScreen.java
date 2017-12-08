@@ -122,9 +122,9 @@ public class GameOverScreen implements Screen {
         gameOverLabel = new Label("Congrats! Here's how you did: " + scoreboard.get(scoreboard.size()-1), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         Table table = new Table();
-        table.top(); // put it at the top of stage
+        table.top();
         table.left();
-        table.setFillParent(true);// table is the size of our stage
+        table.setFillParent(true);
 
         table.add(playLabel).expandX().padTop(10);
         table.row();
@@ -140,7 +140,7 @@ public class GameOverScreen implements Screen {
 
         Table scoreTable = new Table();
         scoreTable.left();
-        scoreTable.setFillParent(true);// table is the size of our stage
+        scoreTable.setFillParent(true);
 
         String scoresList = "Scores:\n======";
         int currentScore = 1;

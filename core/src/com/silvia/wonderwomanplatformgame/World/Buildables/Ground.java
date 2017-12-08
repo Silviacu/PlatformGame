@@ -14,14 +14,14 @@ public class Ground extends BodyTileObject {
         for(MapObject object : map.getLayers().get(mapResources.obj_ground).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            bodydefinition.type = BodyDef.BodyType.StaticBody; //dynamic player affected by graphics and phsycs
-            //staticbody doesnt move can only move programmly, not affected by forces
-            //kinematic canf be afftect by forces only velocity(moving platofrms)
+            bodydefinition.type = BodyDef.BodyType.StaticBody; //dynamic player affected by graphics and physics
+            //static body doesn't move can only move programmatically, not affected by forces
+            //kinematic cant be affected by forces only velocity(moving platforms)
             bodydefinition.position.set(((rect.getX() + rect.getWidth() /2)/ WonderWomanGame.PPM),(rect.getY() +rect.getHeight()/2) /WonderWomanGame.PPM );
             body = world.createBody(bodydefinition);
             shape.setAsBox(rect.getWidth() /2 / WonderWomanGame.PPM, rect.getHeight() /2 /WonderWomanGame.PPM );
             fdef.shape = shape;
-            body.createFixture(fdef);// add ficture to the body
+            body.createFixture(fdef);// add fixture to the body
         }
     }
 }

@@ -44,8 +44,7 @@ public class PauseHUD implements Disposable {
 
         Table table = new Table();
         table.top(); // put it at the top of stage
-        table.setFillParent(true);// table is the size of our stage
-        //03 how many numbers d is for interger       graphic version font
+        table.setFillParent(true);// table is the size of the stage
 
         setupLabels();
 

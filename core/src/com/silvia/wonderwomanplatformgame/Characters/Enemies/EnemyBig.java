@@ -43,6 +43,7 @@ public class EnemyBig extends EnemyCharacter {
     }
 
 
+    @Override
     public void dealContactDamage(Character targetCharacter) {
         this.dealDamage(this.enemyContactDamage, targetCharacter);
     }

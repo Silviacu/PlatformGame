@@ -15,7 +15,7 @@ import com.silvia.wonderwomanplatformgame.World.MapResources;
 
 public abstract class BodyTileObject {
     static BodyDef bodydefinition = new BodyDef();
-    static PolygonShape shape = new PolygonShape();// for our fixture
+    static PolygonShape shape = new PolygonShape();// for the fixture
     static FixtureDef fdef = new FixtureDef();//fixture depth, to define and then add to body
     static Body body;
     static MapResources mapResources = new MapResources();
@@ -25,14 +25,14 @@ public abstract class BodyTileObject {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bodydefinition.type = BodyDef.BodyType.StaticBody; //dynamic player affected by graphics and physics
-            //staticbody doesnt move can only move programmly, not affected by forces
-            //kinematic canf be afftect by forces only velocity(moving platofrms)
+            //static body doesn't move can only move programmatically, not affected by forces
+            //kinematic cant be affected by forces only velocity(moving platforms)
             bodydefinition.position.set(((rect.getX() + rect.getWidth() /2)/ WonderWomanGame.PPM),(rect.getY() +rect.getHeight()/2) /WonderWomanGame.PPM );
-            // body defineition is the position and type
+            // body definition is the position and type
             body = world.createBody(bodydefinition);
             shape.setAsBox(rect.getWidth() /2 / WonderWomanGame.PPM, rect.getHeight() /2 /WonderWomanGame.PPM );
             fdef.shape = shape;
-            body.createFixture(fdef);// add ficture to the body
+            body.createFixture(fdef);// add fixture to the body
         }
     }
 }

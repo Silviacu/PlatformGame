@@ -18,8 +18,7 @@ import static com.silvia.wonderwomanplatformgame.WonderWomanGame.PPM;
 public class CharacterSprite extends Sprite {
     public World world;
     public Body b2body;
-    private Texture characterTexture;
-    private float stateTimer;
+    //private Texture characterTexture;
 
     // constructor
     public CharacterSprite() {
@@ -34,11 +33,9 @@ public class CharacterSprite extends Sprite {
         bodydefinitionw.position.set(32 / WonderWomanGame.PPM,320/WonderWomanGame.PPM); //
         bodydefinitionw.type = BodyDef.BodyType.DynamicBody;
 
-        b2body = world.createBody(bodydefinitionw);// create the body in our world
+        b2body = world.createBody(bodydefinitionw);
 
         FixtureDef fdef = new FixtureDef();//fixture depth
-        //        CircleShape shape = new CircleShape();
-        //        shape.setRadius(5/WonderWomanGame.PPM);// set radius of the circle
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(5/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
         fdef.shape = shape;
@@ -51,21 +48,21 @@ public class CharacterSprite extends Sprite {
         b2body.createFixture(fdef).setUserData("body_sensor");
     }
 
-    public CharacterDefinition calcDefineCharacter(double x, double y, double hitboxX, double hitboxY){
-        return new CharacterDefinition(x, y, hitboxX, hitboxY);
-    }
-    public class CharacterDefinition {
-        double startX;
-        double startY;
-        double hitboxX;
-        double hitboxY;
-
-        public CharacterDefinition(double x, double y, double hitboxX, double hitboxY) {
-            this.startX = x / WonderWomanGame.PPM;
-            this.startY = y / WonderWomanGame.PPM;
-            this.hitboxX = hitboxX / WonderWomanGame.PPM;
-            this.hitboxY = hitboxY / WonderWomanGame.PPM;
-        }
-    }
+//    public CharacterDefinition calcDefineCharacter(double x, double y, double hitboxX, double hitboxY){
+//        return new CharacterDefinition(x, y, hitboxX, hitboxY);
+//    }
+//    public class CharacterDefinition {
+//        double startX;
+//        double startY;
+//        double hitboxX;
+//        double hitboxY;
+//
+//        public CharacterDefinition(double x, double y, double hitboxX, double hitboxY) {
+//            this.startX = x / WonderWomanGame.PPM;
+//            this.startY = y / WonderWomanGame.PPM;
+//            this.hitboxX = hitboxX / WonderWomanGame.PPM;
+//            this.hitboxY = hitboxY / WonderWomanGame.PPM;
+//        }
+//    }
 
 }

@@ -19,7 +19,6 @@ import org.mockito.Mockito;
  */
 public class GameTest  {
 
-    // This is our "test" application
     private static Application application;
 
     // Before running any tests, initialize the application with the headless backend

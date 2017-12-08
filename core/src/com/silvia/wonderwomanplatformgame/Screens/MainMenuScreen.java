@@ -101,8 +101,6 @@ public class MainMenuScreen implements Screen {
             this.dispose();
         }
 
-//        gamecamera.update();
-//        renderer.setView(gamecamera); //render what our game cam can see
         nameLabel.setText("Current Player Name: " + game.playerName);
     }
 
@@ -144,13 +142,11 @@ public class MainMenuScreen implements Screen {
         chooseNameLabel = new Label("Choose Player name: \n\tPlayer A (a)  \n\tPlayer B (b) \n\tPlayer C (c)", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         nameLabel = new Label(this.game.playerName, new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-//        scoreLabel = new Label("Scores (s)", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-
         Table table = new Table();
 
         table.top(); // put it at the top of stage
         table.left();
-        table.setFillParent(true);// table is the size of our stage
+        table.setFillParent(true);// table is the size of the stage
 
         table.row();
         table.add(chooseNameLabel).expandX().padTop(50);
@@ -165,7 +161,7 @@ public class MainMenuScreen implements Screen {
 
         Table scoreTable = new Table();
         scoreTable.left();
-        scoreTable.setFillParent(true);// table is the size of our stage
+        scoreTable.setFillParent(true);// table is the size of the stage
 
         String scoresList = "Scores:\n======";
         int currentScore = 1;

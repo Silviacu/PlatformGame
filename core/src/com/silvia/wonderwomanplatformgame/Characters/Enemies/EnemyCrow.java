@@ -42,6 +42,7 @@ public class EnemyCrow extends EnemyCharacter {
         this.characterSprite = new EnemyCrowSprite(world, this, xposition, yposition);
     }
 
+    @Override
     public void dealContactDamage(Character targetCharacter) {
         this.dealDamage(this.enemyContactDamage, targetCharacter);
     }

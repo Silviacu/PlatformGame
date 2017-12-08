@@ -12,6 +12,13 @@ import com.silvia.wonderwomanplatformgame.WonderWomanGame;
  * Created by silvia on 11/15/2017.
  */
 
+/**
+ * The welcome screen implements libgdx screen
+ * The the welcome screen uses the wonderwomangame to
+ * set the new screen,
+ * render all sprites
+ * create the screen width and height
+ */
 public class WelcomeScreen implements Screen {
 
     private WonderWomanGame game;

@@ -1,18 +1,22 @@
 package com.silvia.wonderwomanplatformgame;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.silvia.wonderwomanplatformgame.Screens.GameScreen;
 import com.silvia.wonderwomanplatformgame.Screens.WelcomeScreen;
 
+
+/**
+ * Passed into LibGDX as the starting point of the game. This class extends game from libgdx.
+ * Set the screen of where the game should start in the welcome screen
+ * Size the window (640,400)
+ * Sets entity variables that are associated with in game entities for identification
+ * renders sprites to the screen
+ *
+ */
 public class WonderWomanGame extends Game {
 	public SpriteBatch batch; //container that hold images and textures
-	// when we redner them to the screen the spritebatch draws everything
-	//public so all of the screens has acces to the sprites
+	// when we render them to the screen the spritebatch draws everything
+	//public so all of the screens has access to the sprites
 	public static String playerName = "Silvia";
 
 	//	=== WINDOW VARIABLES ===

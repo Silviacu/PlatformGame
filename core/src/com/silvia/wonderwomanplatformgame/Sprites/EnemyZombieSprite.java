@@ -183,15 +183,15 @@ public class EnemyZombieSprite extends CharacterSprite {
         bodydefinitionw.position.set(this.xposition / WonderWomanGame.PPM,this.yposition/WonderWomanGame.PPM); //
         bodydefinitionw.type = BodyDef.BodyType.DynamicBody;
 
-        b2body = this.world.createBody(bodydefinitionw);// create the body in our world
+        b2body = this.world.createBody(bodydefinitionw);
 
         FixtureDef fdef = new FixtureDef();//fixture depth
 
-        fdef.filter.categoryBits = WonderWomanGame.ENEMY_BIT;//what is this fixture
+        fdef.filter.categoryBits = WonderWomanGame.ENEMY_BIT;
         fdef.filter.maskBits =
                 WonderWomanGame.DEFAULT_BIT |
                         WonderWomanGame.SPIKE_BIT |
-                        WonderWomanGame.WONDER_BIT; //// what zombie can collide with
+                        WonderWomanGame.WONDER_BIT;
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(5/WonderWomanGame.PPM, 25/WonderWomanGame.PPM);
@@ -206,7 +206,4 @@ public class EnemyZombieSprite extends CharacterSprite {
         b2body.createFixture(fdef).setUserData(this);
     }
 
-    public void onTouch() {
-        Gdx.app.log("Enemy Zombie", "Collision");
-    }
 }

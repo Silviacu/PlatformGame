@@ -33,20 +33,20 @@ import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 public class GameScreen implements Screen{
     public WonderWomanGame game;
 
-    private OrthographicCamera gamecamera; //what follows along in our game came
+    private OrthographicCamera gamecamera; //what follows along in the game camera
     private Viewport gamePort;
     private PointsTracker pointsTracker;
     private PlayHUD hud;
     private DeadHUD deadHud;
     private PauseHUD pauseHUD;
 
-    private TmxMapLoader maploader;//loaded map into our world
+    private TmxMapLoader maploader;//loaded map into the world
     private TiledMap map; //reference to the map
-    private OrthogonalTiledMapRenderer renderer; // rendered our map to the screen
+    private OrthogonalTiledMapRenderer renderer; // rendered the map to the screen
 
     //Box2D variables
     private World world;//
-    private Box2DDebugRenderer b2dr; //givs up graphiccal representation of our fixtures in our world
+    private Box2DDebugRenderer b2dr; //gives graphical representation of the fixtures in the world
 
     public enum HudState {
         PLAY,
@@ -203,10 +203,10 @@ public class GameScreen implements Screen{
 
     public void update(float dt){//updating of gameworld
         //check for key and mouse clicking
-        handleInput(dt);//deleta time
+        handleInput(dt);//delta time
 
-        //in order for box2d to execture our physics simulation we need to tell it to
-        //calcaltute our update per second
+        //in order for box2d to execute the physics simulation we need to tell it to
+        //calculate update per second
 
         if (this.hudState == HudState.PLAY) {
             world.step(1/60f, 6, 2); // time stamp(60 times a second, velocity, position
@@ -219,9 +219,10 @@ public class GameScreen implements Screen{
         }
 
         // update camera at ever iteration of game cycle
-
         deadHud.update(dt);
         pauseHUD.update(dt);
+
+
 
         if (((WonderWomanCharacter)player1).status == Character.CharacterLivingStatus.DEAD) {
             this.hud.pausePressed();
@@ -229,11 +230,10 @@ public class GameScreen implements Screen{
             this.deadHud.showDeadHud();
         }
 
-        // everytime our character moves we want to track him with our gamecam
-        // gamecamera.position.x = ((WonderWomanCharacter.player1characterSprite.b2body.getPosition().x;
-        gamecamera.position.x = ((WonderWomanCharacter)player1).getXPosition();
+
+        gamecamera.position.x = ((WonderWomanCharacter)player1).getXPosition();// track main character
         gamecamera.update();
-        renderer.setView(gamecamera); //render what our game cam can see
+        renderer.setView(gamecamera); //render what the game camera can see
     }
 
     @Override
@@ -242,12 +242,10 @@ public class GameScreen implements Screen{
         // clear the screen
         Gdx.gl.glClearColor(0,0,0,1);// clear the color
         Gdx.gl.glClear(GL_COLOR_BUFFER_BIT);//clear the screen
-        //game batch to reconginze where our camera is in our game world
-        // only render what pur camera can see
+        //game batch to recognizes where the camera is in the game world
 
         renderer.render();// after game clears there needs to render
-
-        //render all the objects inside the game for the fictures and bodies
+        //render all the objects inside the game for the fixtures and bodies
 //        b2dr.render(world, gamecamera.combined);
 
         game.batch.setProjectionMatrix(gamecamera.combined);
@@ -255,7 +253,6 @@ public class GameScreen implements Screen{
         ((WonderWomanSprite)((WonderWomanCharacter)player1).characterSprite).draw(game.batch);
         ((EnemyZombie)zombie1).characterSprite.draw(game.batch);
         ((EnemyCrow)crow1).characterSprite.draw(game.batch);
-        //big1.bigSprite.draw(game.batch);
         ((EnemyBig)big2).characterSprite.draw(game.batch);
         game.batch.end();
 

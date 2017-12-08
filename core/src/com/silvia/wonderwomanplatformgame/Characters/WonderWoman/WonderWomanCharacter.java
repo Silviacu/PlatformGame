@@ -68,6 +68,7 @@ public class WonderWomanCharacter extends Character {
         attacks = new WonderWomanAttackCollection();
     }
 
+
     @Override
     public double receiveDamage(double damage) {
         if (health - damage <= 0) {

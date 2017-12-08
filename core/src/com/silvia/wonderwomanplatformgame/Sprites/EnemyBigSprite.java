@@ -187,15 +187,14 @@ public class EnemyBigSprite extends CharacterSprite {
         bodydefinitionw.position.set(this.xposition / WonderWomanGame.PPM,this.yposition/WonderWomanGame.PPM); //
         bodydefinitionw.type = BodyDef.BodyType.DynamicBody;
 
-        b2body = this.world.createBody(bodydefinitionw);// create the body in our world
-
+        b2body = this.world.createBody(bodydefinitionw);
         FixtureDef fdef = new FixtureDef();//fixture depth
 
-        fdef.filter.categoryBits = WonderWomanGame.ENEMY_BIT;//what is this fixture
+        fdef.filter.categoryBits = WonderWomanGame.ENEMY_BIT;
         fdef.filter.maskBits =
                 WonderWomanGame.DEFAULT_BIT |
                         WonderWomanGame.SPIKE_BIT |
-                        WonderWomanGame.WONDER_BIT; //// what big can collide with
+                        WonderWomanGame.WONDER_BIT;
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(25/WonderWomanGame.PPM, 15/WonderWomanGame.PPM);

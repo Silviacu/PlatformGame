@@ -230,13 +230,11 @@ public class WonderWomanSprite extends CharacterSprite {
         bodydefinitionw.position.set(32 / WonderWomanGame.PPM,320/WonderWomanGame.PPM); //
         bodydefinitionw.type = BodyDef.BodyType.DynamicBody;
 
-        b2body = this.world.createBody(bodydefinitionw);// create the body in our world
+        b2body = this.world.createBody(bodydefinitionw);
 
         FixtureDef fdef = new FixtureDef();//fixture depth
-        //        CircleShape shape = new CircleShape();
-        //        shape.setRadius(5/WonderWomanGame.PPM);// set radius of the circle
 
-        fdef.filter.categoryBits = WonderWomanGame.WONDER_BIT;//what is this fixture
+        fdef.filter.categoryBits = WonderWomanGame.WONDER_BIT;
         fdef.filter.maskBits =
                 WonderWomanGame.DEFAULT_BIT |
                         WonderWomanGame.TREASURESMALL_BIT |
@@ -245,7 +243,7 @@ public class WonderWomanSprite extends CharacterSprite {
                         WonderWomanGame.POWERUP_BIT |
                         WonderWomanGame.SPIKE_BIT |
                         WonderWomanGame.ZONEFALL_BIT |
-                        WonderWomanGame.ZONEEND_BIT |//// what wonderwoman can collide with
+                        WonderWomanGame.ZONEEND_BIT |
                         WonderWomanGame.ENEMY_BIT |
                         WonderWomanGame.BIG_BIG_BIT;
         PolygonShape shape = new PolygonShape();
